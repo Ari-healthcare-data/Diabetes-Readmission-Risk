@@ -1,4 +1,6 @@
-# Data Understanding: Early Exploration Notes
+# Data Understanding
+
+## Day 1 - Early Exploration Notes
 
 This file captures my initial understanding of the dataset during the first phase of the project. It’s a bit unpolished on purpose, I wrote it while actually exploring the data, so it reflects real observations, questions, and a few things I had to go back and rethink.
 
@@ -117,3 +119,55 @@ Overall, this feels less like a “clean dataset analysis” and more like tryin
 A lot of the early work has been less about drawing conclusions and more about figuring out what the data actually represents, where it’s incomplete, and what assumptions I can safely make.
 
 That part has probably been the most important so far.
+
+---
+
+# Progress Updates
+
+## Day 2 - Feature Engineering + Data Structuring
+
+### What I worked on today
+
+- Built full feature engineering pipeline
+- Removed identifier columns (encounter_id, patient_nbr)
+- Dropped low-information features
+- Handled categorical variables using one-hot encoding
+- Created final ML-ready dataset (~2418 features)
+- Separated target variable to avoid leakage
+
+---
+
+### Key insights from today
+
+- Feature space expanded significantly due to high-cardinality variables (especially diagnosis codes)
+- Dataset is highly imbalanced (~11% positive class)
+- Encoding strategy increased complexity more than expected
+- Tradeoff became clear between simplicity vs dimensionality
+
+---
+
+### Updated understanding of the problem
+
+At this stage, the project has shifted from simple EDA into feature engineering and modeling preparation.
+
+The main challenge now is not just understanding the data, but deciding:
+- how to represent high-cardinality clinical variables
+- how to manage class imbalance
+- how to prevent overfitting in a very wide feature space
+
+---
+
+### What changed in my thinking since Day 1
+
+Originally, I thought this project would move quickly from EDA to modeling.
+
+But after working with the data more deeply, I realized:
+- most of the effort is actually in data preparation
+- clinical datasets are messy and heavily encoded
+- feature engineering decisions will strongly affect model outcomes
+
+---
+
+### Next step
+
+Move into statistical analysis to validate early patterns before modeling.

@@ -1,4 +1,4 @@
-# Methodology: Work in Progress
+# Methodology (Work in Progress)
 
 This document outlines how I approached the project so far. It’s still evolving, and I expect it to change quite a bit as I move deeper into the analysis and eventually into modeling and dashboard work.
 
@@ -10,13 +10,13 @@ Right now it mostly reflects what I’ve actually done and how I’ve been think
 
 The general idea for this project is to treat it like a real healthcare analytics workflow rather than just a modeling exercise.
 
-So instead of jumping straight into machine learning, I started with:
-- understanding the dataset
-- cleaning obvious issues
-- doing exploratory analysis
-- thinking about how this would actually be used in a hospital reporting context
+Instead of jumping directly into modeling, I tried to follow a more realistic analytics workflow:
 
-The modeling part will come later, but I wanted the structure to feel realistic first.
+1. Understand the dataset  
+2. Clean and structure the data  
+3. Explore patterns  
+4. Engineer features  
+5. Prepare for statistical analysis and modeling  
 
 ---
 
@@ -34,20 +34,15 @@ Nothing fancy here, just trying to understand what I’m working with before tou
 
 ---
 
-## Step 2 - Cleaning (early stage)
+## Step 2 - Cleaning 
 
-The first real issue I ran into was missing data being encoded as “?” instead of proper null values.
-
-So I replaced those with NaN so I could actually work with them properly.
-
-After that, I started looking at missingness more seriously and realized some columns were almost entirely incomplete.
-
-At this point I made a few early decisions:
-
-- removed `weight` because it was ~97% missing (not usable in any meaningful way)
-- removed `examide` and `citoglipton` because they had only one unique value each (no analytical value)
-
-I didn’t want to over-clean at this stage, so I kept most variables for now and will revisit later if needed.
+Key cleaning steps:
+- Replaced “?” with NaN  
+- Identified missing value patterns  
+- Removed near-empty or low-information variables:
+  - weight (too much missing data)
+  - examide
+  - citoglipton  
 
 ---
 
@@ -73,15 +68,15 @@ I may revisit this later if more nuance is needed.
 
 ## Step 4 - Exploratory analysis (EDA)
 
-Most of the work so far has been exploratory.
-
-I’ve been looking at:
-- distributions of key variables
-- missing data patterns
-- basic comparisons between readmitted vs not readmitted groups
-- early correlations and trends
+At this stage, I explored:
+- distributions of key variables  
+- missing data patterns  
+- group comparisons (readmitted vs not readmitted)  
+- early relationships between variables  
 
 Nothing too advanced yet,  mostly trying to understand what actually matters in the dataset.
+
+Findings were mostly descriptive, not statistical.
 
 Some early things I noticed:
 - prior inpatient visits seem linked to higher readmission risk
@@ -93,16 +88,23 @@ These are not strong conclusions yet, just early signals.
 
 ---
 
-## Step 5 - Thinking ahead to SQL layer
+## Step 5: Feature Engineering
 
-I haven’t built the SQL part yet, but I’m planning to use PostgreSQL to simulate more of a hospital reporting environment.
+This was the most time-intensive part so far.
 
-The idea is to eventually build queries around things like:
-- readmission rates by patient group
-- utilization summaries
-- hospital-level aggregations
+Steps included:
+- Removing identifier columns  
+- Handling categorical variables  
+- Applying one-hot encoding  
 
-Right now this is still in the planning stage.
+### Outcome:
+- Dataset expanded to ~2418 features  
+- High dimensionality mainly driven by:
+  - diagnosis codes  
+  - medical specialty  
+  - medication variables  
+
+This introduced tradeoffs between simplicity and interpretability.
 
 ---
 
@@ -117,7 +119,30 @@ I don’t want to overcomplicate this stage. I think the key is just to support 
 
 ---
 
-## Step 7 - Dashboard development (planned)
+## Step 7 - Modeling
+
+- evaluation using appropriate metrics
+
+---
+
+
+---
+
+## Step 8 - Thinking ahead to SQL layer
+
+I haven’t built the SQL part yet, but I’m planning to use PostgreSQL to simulate more of a hospital reporting environment.
+
+The idea is to eventually build queries around things like:
+- readmission rates by patient group
+- utilization summaries
+- hospital-level aggregations
+
+Right now this is still in the planning stage.
+
+---
+
+
+## Step 9 - Dashboard development (planned)
 
 Eventually I plan to build a dashboard in either Power BI or Tableau Public.
 
@@ -127,6 +152,15 @@ The goal is to simulate something closer to what a healthcare analytics team mig
 - high-level KPI tracking
 
 This will likely come after the SQL layer is more developed.
+
+---
+
+## Known Issues
+
+- High class imbalance (~11% positive class)  
+- Very high dimensional feature space  
+- Some variables with high missingness  
+- Diagnosis encoding may need revisiting  
 
 ---
 
@@ -145,6 +179,6 @@ Because of this, I’m treating results as exploratory and descriptive, not caus
 
 ## Closing notes (for now)
 
-This methodology will definitely evolve as I go. Right now it’s mostly focused on building a structured approach rather than rushing into modeling.
+This methodology will continue to evolve as the project progresses.
 
-The main goal at this stage has been to understand the data properly and avoid making assumptions too early. 
+At this stage, the focus is less on building a perfect pipeline and more on understanding the data deeply before modeling.

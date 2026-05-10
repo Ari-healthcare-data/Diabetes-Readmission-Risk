@@ -1,6 +1,8 @@
 # Data Dictionary: Diabetes Readmission Dataset
 
-This document explains the main variables used in this project. I put this together while exploring the dataset, so some parts are more descriptive than formal. The goal here is just to keep track of what I understood at each stage, not to over-engineer the documentation.
+This document is a simplified explanation of the dataset based on my exploration so far. I wrote this while working through the data, so it reflects my current understanding rather than a formal clinical definition. The goal here is just to keep track of what I understood at each stage, not to recreate the [Description PDF documentation]( https://www.kaggle.com/datasets/brandao/diabetes)  that came with the dataset.
+
+
 
 Dataset: [Diabetes 130-US hospitals (1999–2008)](https://www.kaggle.com/datasets/brandao/diabetes)
 
@@ -10,7 +12,8 @@ Dataset: [Diabetes 130-US hospitals (1999–2008)](https://www.kaggle.com/datase
 
 **encounter_id**  
 A unique ID for each hospital encounter.  
-Not really used for analysis, just helps keep records distinct.
+Not really used for analysis perse, just helps keep records distinct.
+Not used for modeling
 
 **patient_nbr**  
 A unique identifier for each patient.  
@@ -141,7 +144,7 @@ This simplifies the problem into a standard classification setup.
 
 ---
 
-## Data Cleaning Decisions (so far)
+## Data Cleaning Decisions (so far, Day 1)
 
 A few things I removed early on:
 
