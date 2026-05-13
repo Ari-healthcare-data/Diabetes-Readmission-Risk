@@ -51,10 +51,13 @@ The dataset contains over 100,000 hospital encounters from 130 U.S. hospitals an
 
 Most of the early exploration for this project was done on my local system and in a Kaggle Notebook before I moved things over into this GitHub repo.
 
-Kaggle Notebook: 
-[01_eda](https://www.kaggle.com/code/datascienceam/01-eda)
-[02_feature_engineering](https://www.kaggle.com/code/datascienceam/02-feature-engineering)
-[03_stat_analysis](https://www.kaggle.com/code/datascienceam/03-stat-analysis)
+**Kaggle Notebooks:**
+
+- [01_eda](https://www.kaggle.com/code/datascienceam/01-eda)
+
+- [02_feature_engineering](https://www.kaggle.com/code/datascienceam/02-feature-engineering)
+
+- [03_stat_analysis](https://www.kaggle.com/code/datascienceam/03-stat-analysis)
 
 The Kaggle notebook is where I worked through the messy part of the analysis, getting a feel for the data, testing cleaning decisions, and doing some quick visual checks to understand what was going on.
 
