@@ -151,14 +151,4 @@ A few things I removed early on:
 - `weight` is almost completely missing (~97%), not usable in current form  
 - `examide` and `citoglipton`  only have one unique value each, so they don’t really add information  
 
-Everything else is still under consideration depending on how analysis evolves.
-
----
-
-## A few honest notes
-
-Some variables here are clearly more meaningful clinically than others, but in practice, usefulness depends a lot on completeness and context.
-
-Right now I’m trying not to drop too much too early, but also not overcomplicate things with variables that are mostly empty or hard to interpret.
-
-This will likely evolve as I move into modeling and deeper analysis. 
+Kept most other variables initially to avoid premature assumptions.

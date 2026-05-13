@@ -110,21 +110,24 @@ This introduced tradeoffs between simplicity and interpretability.
 
 ## Step 6 - Statistical analysis (planned)
 
-I haven’t started this properly yet, but the intention is to use a mix of:
-- basic group comparisons
-- correlation checks
-- possibly logistic regression later on
+Performed hypothesis testing to validate observed patterns:
 
-I don’t want to overcomplicate this stage. I think the key is just to support the exploratory findings rather than force complex methods too early.
+- Chi-square tests (categorical variables)
+- T-tests (numerical variables)
+
+Key findings:
+- inpatient history is strongly associated with readmission
+- utilization variables are more predictive than demographics
+- many small but statistically significant effects exist due to dataset size
+
+Important realization:
+> statistical significance does not always equal practical importance
 
 ---
 
 ## Step 7 - Modeling
 
 - evaluation using appropriate metrics
-
----
-
 
 ---
 
@@ -172,6 +175,11 @@ There are a few limitations in the dataset that I’m aware of from early on:
 - a lot of missing data in clinically important variables
 - possible differences in coding practices across hospitals
 - limited context around patient history outside the dataset
+- no time-based structure in dataset
+- no separation of planned vs unplanned readmissions
+- potential hospital-level bias
+- limited socioeconomic context
+- observational data only (no causality)
 
 Because of this, I’m treating results as exploratory and descriptive, not causal.
 

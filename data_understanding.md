@@ -171,3 +171,80 @@ But after working with the data more deeply, I realized:
 ### Next step
 
 Move into statistical analysis to validate early patterns before modeling.
+
+---
+
+## Day 3 - Statistical Validation of Early Patterns
+
+### What I worked on today
+
+Today I moved from exploration into statistical validation to check whether the patterns I observed during EDA were actually supported by data.
+
+I focused on:
+- Performing hypothesis testing on key variables
+- Using chi-square tests for categorical variables
+- Using t-tests for numerical variables
+- Comparing readmitted vs non-readmitted patient groups
+
+The goal here was not to build anything predictive yet, but to validate whether earlier observations were statistically meaningful or just visual patterns.
+
+---
+
+### Key confirmations from statistical testing
+
+A few patterns became clearer after running formal tests:
+
+- Prior inpatient visits showed the strongest and most consistent relationship with 30-day readmission
+- Emergency visits and number of medications also showed statistically significant differences between groups
+- Length of stay was statistically significant, but the actual difference between groups was relatively small
+- Demographic variables such as race and gender did not show strong or consistent relationships with readmission
+
+Overall, the results mostly confirmed what I suspected during EDA, but with clearer separation in some variables than others.
+
+---
+
+### Important observation: statistical vs practical significance
+
+One thing that stood out during this stage is how easily large datasets can produce very small p-values.
+
+With ~100,000 records, even small differences between groups can become statistically significant.
+
+Because of this, I started to think more carefully about:
+- Whether a relationship is statistically significant
+- Versus whether it is practically meaningful in a healthcare context
+
+This distinction feels especially important in this dataset.
+
+---
+
+### Reflections
+
+A few things surprised me during this phase:
+
+- I initially expected emergency visits to be one of the strongest indicators, but inpatient history turned out to be more influential
+- Some demographic variables I thought might matter ended up showing very weak relationships
+- A lot of the signal in this dataset seems to come from prior healthcare utilization rather than demographic or static patient attributes
+
+It also made me question whether I am observing true clinical risk factors or more general healthcare system usage patterns.
+
+That distinction is not fully clear yet, but it feels important.
+
+---
+
+### Limitations
+
+A few limitations to keep in mind:
+
+- Multiple hypothesis testing was not adjusted for, which may inflate false positives
+- Tests do not account for confounding variables (e.g., severity vs access to care)
+- Readmission is influenced by both patient-level and system-level factors, which are not separated in this dataset
+
+These limitations mean results should be interpreted as exploratory rather than causal.
+
+---
+
+### Next step
+
+Next, I will move into modeling to see whether these statistically significant patterns actually translate into predictive power.
+
+I will start with a baseline model (likely logistic regression) and evaluate performance using appropriate metrics for imbalanced data.
