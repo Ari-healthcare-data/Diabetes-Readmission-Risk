@@ -248,3 +248,112 @@ These limitations mean results should be interpreted as exploratory rather than 
 Next, I will move into modeling to see whether these statistically significant patterns actually translate into predictive power.
 
 I will start with a baseline model (likely logistic regression) and evaluate performance using appropriate metrics for imbalanced data.
+
+---
+
+---
+
+## Day 4 — Baseline Modeling (Logistic Regression)
+
+### What I built
+
+I trained a baseline Logistic Regression model using:
+- stratified train/test split
+- standardized numerical features
+- balanced class weights
+
+Evaluation focused on:
+- recall
+- precision
+- ROC-AUC
+
+instead of raw accuracy due to class imbalance.
+
+---
+
+### Baseline results
+
+#### ROC-AUC:
+~0.64
+
+#### Key metrics:
+- recall for readmitted patients: ~0.55
+- precision: ~0.17
+
+The model captures signal, but performance is still limited.
+
+A lot of false positives remain.
+
+---
+
+### Most important modeling observation
+
+The most interesting part was not actually model performance.
+
+The important part was:
+the model reinforced the same utilization-related patterns observed earlier.
+
+Variables tied to:
+- inpatient history
+- medication intensity
+- healthcare interaction
+
+continued appearing important.
+
+That consistency across:
+- EDA
+- statistical testing
+- modeling
+
+made the pattern feel more credible.
+
+---
+
+### Shift in interpretation
+
+At this point, my interpretation became less patient-only focused.
+
+Instead of thinking:
+readmission simply reflects sickness
+
+I started thinking:
+readmission may partially reflect repeated healthcare system interaction patterns.
+
+In other words:
+patients deeply connected to the healthcare system appear substantially more likely to cycle back into readmission.
+
+That does NOT prove causation.
+
+But it consistently appears throughout the project so far.
+
+---
+
+### Current working hypothesis
+
+Current working idea:
+
+> healthcare utilization history may be more predictive of readmission than static demographic characteristics.
+
+That became the central narrative emerging from the project.
+
+---
+
+### What I still want to test
+
+The next important step is checking whether:
+- tree-based models
+- feature importance rankings
+- more flexible algorithms
+
+continue reinforcing this same utilization-driven story.
+
+If they do, that strengthens the interpretation considerably.
+
+---
+
+### Overall Reflection So Far
+
+This project has gradually become more about:
+> understanding what hospital readmissions actually represent in healthcare data.
+
+That shift ended up being much more interesting than I expected going in.

@@ -127,7 +127,17 @@ Important realization:
 
 ## Step 7 - Modeling
 
-- evaluation using appropriate metrics
+### 7a - Baseline Predictive Modeling
+
+#### Baseline model
+
+Current baseline:
+- Logistic Regression
+
+Reason:
+- interpretable
+- strong baseline comparison
+- easier to understand feature relationships
 
 ---
 

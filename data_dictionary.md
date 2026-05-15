@@ -8,6 +8,17 @@ Dataset: [Diabetes 130-US hospitals (1999–2008)](https://www.kaggle.com/datase
 
 ---
 
+# Dataset Shape
+
+Approximate dataset size before feature engineering:
+- ~101,000 hospital encounters
+- 50+ original columns
+
+After one-hot encoding:
+- ~2,418 features
+
+---
+
 ## Identifiers
 
 **encounter_id**  
