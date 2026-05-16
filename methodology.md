@@ -139,6 +139,23 @@ Reason:
 - strong baseline comparison
 - easier to understand feature relationships
 
+
+### 7b - Random Forest
+
+Also trained a Random Forest model to see if a non-linear, tree-based approach would capture more signal in the data.
+
+- Tree-based model for capturing non-linear relationships
+- No feature scaling required
+- Used `class_weight="balanced"` to handle class imbalance
+
+#### Results:
+- ROC-AUC: ~0.65
+- Recall: ~0.01
+
+Even though the ROC-AUC improved slightly compared to Logistic Regression, the model performed significantly worse at identifying readmitted patients.
+
+Most predictions ended up concentrated in the majority class, which suggests that class imbalance is still dominating the learning process.
+
 ---
 
 ## Step 8 - Thinking ahead to SQL layer

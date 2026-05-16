@@ -357,3 +357,20 @@ This project has gradually become more about:
 > understanding what hospital readmissions actually represent in healthcare data.
 
 That shift ended up being much more interesting than I expected going in.
+
+## Day 5 – After Initial Modeling Reflections
+
+After building both Logistic Regression and Random Forest models, my understanding of the dataset shifted slightly.
+
+One thing that stood out is that even though Random Forest is a more flexible model, it did not improve the identification of readmitted patients. In fact, it performed significantly worse on recall for the minority class.
+
+This made me rethink my earlier assumption that more complex models would naturally capture the patterns better.
+
+It also reinforced something I had been seeing since EDA:
+
+utilization-related variables (especially inpatient history) consistently carry signal across every stage of the analysis.
+
+However, the modeling results also highlighted a limitation:
+even when signal exists, separating high-risk patients is not straightforward in this dataset.
+
+At this point, I’m starting to think that readmission risk is not just a patient-level prediction problem, but also reflects system-level interaction patterns and class imbalance effects that standard models struggle with.

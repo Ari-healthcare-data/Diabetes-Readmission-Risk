@@ -2,15 +2,17 @@
 
 ## Project Overview
 
-This project explores 30-day hospital readmissions among diabetes patients using the Diabetes 130-US hospitals (1999–2008) dataset.
+This project analyzes 30-day hospital readmissions among diabetes patients using the Diabetes 130-US hospitals (1999–2008) dataset.
 
-At first, I approached this mostly as prediction problem. But after spending time with the data, the project gradually shifted into something more interesting:
+What started as a fairly standard classification problem gradually turned into something a bit more interesting to me:
 
-trying to understand what hospital readmissions actually represent in a real healthcare system.
+understanding what hospital readmission risk is actually capturing inside a real healthcare system.
 
-A major theme that kept appearing throughout the analysis was that readmission risk does not seem driven only by patient demographics or isolated clinical measurements. Instead, a large amount of the signal appears connected to prior healthcare system utilization patterns, especially inpatient history.
+Across exploratory analysis, statistical testing, and early modeling, a consistent pattern kept showing up:
 
-That became the central direction of the project.
+patients with higher prior healthcare utilization—especially inpatient history—tend to have higher readmission risk.
+
+That observation is not framed as causation, but it has become the central thread of the project so far.
 
 ---
 
@@ -29,6 +31,7 @@ In this project, I am focusing on:
 - exploring patterns associated with 30-day readmissions
 - understanding utilization trends
 - identifying possible risk indicators
+- evaluating whether patterns are consistent across statistical + ML methods
 - preparing the data for future reporting and modeling work
 
 ---
@@ -73,28 +76,19 @@ This GitHub version is a cleaner, more structured write-up of that same process,
 
 ---
 
-Current Project Status (End of Day 4)
+## Current Project Status (End of Day 5 – Modeling Part 2)
 
-So far I have completed:
-- baseline predictive modeling (Logistic Regression)
+At this stage, I have completed:
+### Tree-Based Model (Random Forest)
 
-I built a baseline Logistic Regression model using:
-- stratified train/test split
-- feature scaling
-- class balancing (class_weight="balanced")
+A Random Forest model was trained to test whether nonlinear relationships improve performance.
 
-Current baseline performance:
-- ROC-AUC: ~0.64
-- Recall for readmitted patients: ~0.55
-- Precision remains low (~0.17)
+**Performance:**
+- ROC-AUC: ~0.65
+- Recall (readmitted class): ~0.01
+- Accuracy: ~0.89 (misleading due to imbalance)
 
-The model captures some signal, but performance is still fairly limited.
-
-That said, the interesting part was not really the score itself.
-
-The model reinforced earlier findings:
-- inpatient utilization history repeatedly emerged as one of the strongest signals
-- utilization variables consistently mattered more than demographic variables
+Despite higher accuracy, the model performs poorly at identifying readmitted patients.
 
 ---
 
@@ -198,4 +192,4 @@ diabetes-readmission-risk/
 - notebooks/
 ```
 
-Note: The fully encoded feature dataset (`diabetic_features.csv`) is not included in the repository due to file size constraints. It can be recreated by running `02-feature-engineering.ipynb`.
+Note: The fully encoded feature dataset (`diabetic_features.csv`) is not included in the repository due to file size constraints. It can be recreated by running `02-feature-
