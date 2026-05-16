@@ -6,11 +6,11 @@ This project analyzes 30-day hospital readmissions among diabetes patients using
 
 What started as a fairly standard classification problem gradually turned into something a bit more interesting to me:
 
-understanding what hospital readmission risk is actually capturing inside a real healthcare system.
+> Understanding what hospital readmission risk is actually capturing inside a real healthcare system.
 
 Across exploratory analysis, statistical testing, and early modeling, a consistent pattern kept showing up:
 
-patients with higher prior healthcare utilization—especially inpatient history—tend to have higher readmission risk.
+> Patients with higher prior healthcare utilization, especially inpatient history, tend to have higher readmission risk.
 
 That observation is not framed as causation, but it has become the central thread of the project so far.
 
