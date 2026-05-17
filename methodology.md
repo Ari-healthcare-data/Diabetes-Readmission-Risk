@@ -156,6 +156,45 @@ Even though the ROC-AUC improved slightly compared to Logistic Regression, the m
 
 Most predictions ended up concentrated in the majority class, which suggests that class imbalance is still dominating the learning process.
 
+
+### 7c - Threshold Tuning
+
+After evaluating the Random Forest output, I tested threshold tuning instead of relying only on the default 0.5 cutoff.
+
+Adjusted threshold:
+- 0.50 → 0.30
+
+## Why this mattered
+
+The default threshold was heavily favoring the majority class.
+
+Lowering the threshold increased sensitivity toward the minority class.
+
+### Result
+- recall improved modestly
+- precision decreased
+- more high-risk patients were identified
+
+The numerical improvement itself was relatively small.
+
+But conceptually, this stage became very important because it shifted the project toward:
+- model interpretation
+- healthcare tradeoffs
+- and decision-focused evaluation
+
+This stage reinforced something important:
+
+model quality depends not only on the algorithm, but also on:
+- how predictions are interpreted
+- what errors matter most
+- and the real-world objective.
+
+In healthcare:
+- false negatives may carry significant consequences
+- while false positives may sometimes be more acceptable
+
+That tradeoff became much more tangible during threshold tuning.
+
 ---
 
 ## Step 8 - Thinking ahead to SQL layer

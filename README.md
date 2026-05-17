@@ -76,19 +76,23 @@ This GitHub version is a cleaner, more structured write-up of that same process,
 
 ---
 
-## Current Project Status (End of Day 5 – Modeling Part 2)
+## Current Project Status (End of Day 6 – Modeling Part 3)
 
-At this stage, I have completed:
-### Tree-Based Model (Random Forest)
+Model Improvements: Threshold Tuning
 
-A Random Forest model was trained to test whether nonlinear relationships improve performance.
+After evaluating the Random Forest results, I tested threshold tuning instead of relying only on the default 0.5 classification cutoff.
 
-**Performance:**
-- ROC-AUC: ~0.65
-- Recall (readmitted class): ~0.01
-- Accuracy: ~0.89 (misleading due to imbalance)
+### Adjustment
+- Lowered prediction threshold:
+  - from 0.50
+  - to 0.30
 
-Despite higher accuracy, the model performs poorly at identifying readmitted patients.
+### Outcome
+- Recall improved modestly
+- Precision decreased (expected tradeoff)
+- More high-risk patients were identified
+
+Even though the improvement was not dramatic, this step felt important because it shifted the project to thinking about how model decisions behave in real healthcare scenarios.
 
 ---
 
@@ -192,4 +196,4 @@ diabetes-readmission-risk/
 - notebooks/
 ```
 
-Note: The fully encoded feature dataset (`diabetic_features.csv`) is not included in the repository due to file size constraints. It can be recreated by running `02-feature-
+Note: The fully encoded feature dataset (`diabetic_features.csv`) is not included in the repository due to file size constraints. It can be recreated by running `02-feature-engineering.ipynb`.

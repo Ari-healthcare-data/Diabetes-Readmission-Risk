@@ -1,6 +1,6 @@
 # Data Understanding
 
-## Day 1 - Early Exploration Notes
+# Day 1 - Early Exploration Notes
 
 This file captures my initial understanding of the dataset during the first phase of the project. It’s a bit unpolished on purpose, I wrote it while actually exploring the data, so it reflects real observations, questions, and a few things I had to go back and rethink.
 
@@ -124,9 +124,9 @@ That part has probably been the most important so far.
 
 # Progress Updates
 
-## Day 2 - Feature Engineering + Data Structuring
+# Day 2 - Feature Engineering + Data Structuring
 
-### What I worked on today
+## What I worked on today
 
 - Built full feature engineering pipeline
 - Removed identifier columns (encounter_id, patient_nbr)
@@ -137,7 +137,7 @@ That part has probably been the most important so far.
 
 ---
 
-### Key insights from today
+## Key insights from today
 
 - Feature space expanded significantly due to high-cardinality variables (especially diagnosis codes)
 - Dataset is highly imbalanced (~11% positive class)
@@ -146,7 +146,7 @@ That part has probably been the most important so far.
 
 ---
 
-### Updated understanding of the problem
+## Updated understanding of the problem
 
 At this stage, the project has shifted from simple EDA into feature engineering and modeling preparation.
 
@@ -157,7 +157,7 @@ The main challenge now is not just understanding the data, but deciding:
 
 ---
 
-### What changed in my thinking since Day 1
+## What changed in my thinking since Day 1
 
 Originally, I thought this project would move quickly from EDA to modeling.
 
@@ -168,15 +168,15 @@ But after working with the data more deeply, I realized:
 
 ---
 
-### Next step
+## Next step
 
 Move into statistical analysis to validate early patterns before modeling.
 
 ---
 
-## Day 3 - Statistical Validation of Early Patterns
+# Day 3 - Statistical Validation of Early Patterns
 
-### What I worked on today
+## What I worked on today
 
 Today I moved from exploration into statistical validation to check whether the patterns I observed during EDA were actually supported by data.
 
@@ -190,7 +190,7 @@ The goal here was not to build anything predictive yet, but to validate whether 
 
 ---
 
-### Key confirmations from statistical testing
+## Key confirmations from statistical testing
 
 A few patterns became clearer after running formal tests:
 
@@ -203,7 +203,7 @@ Overall, the results mostly confirmed what I suspected during EDA, but with clea
 
 ---
 
-### Important observation: statistical vs practical significance
+## Important observation: statistical vs practical significance
 
 One thing that stood out during this stage is how easily large datasets can produce very small p-values.
 
@@ -217,7 +217,7 @@ This distinction feels especially important in this dataset.
 
 ---
 
-### Reflections
+## Reflections
 
 A few things surprised me during this phase:
 
@@ -231,7 +231,7 @@ That distinction is not fully clear yet, but it feels important.
 
 ---
 
-### Limitations
+## Limitations
 
 A few limitations to keep in mind:
 
@@ -243,7 +243,7 @@ These limitations mean results should be interpreted as exploratory rather than 
 
 ---
 
-### Next step
+## Next step
 
 Next, I will move into modeling to see whether these statistically significant patterns actually translate into predictive power.
 
@@ -253,9 +253,9 @@ I will start with a baseline model (likely logistic regression) and evaluate per
 
 ---
 
-## Day 4 — Baseline Modeling (Logistic Regression)
+# Day 4 — Baseline Modeling (Logistic Regression)
 
-### What I built
+## What I built
 
 I trained a baseline Logistic Regression model using:
 - stratified train/test split
@@ -271,12 +271,12 @@ instead of raw accuracy due to class imbalance.
 
 ---
 
-### Baseline results
+## Baseline results
 
-#### ROC-AUC:
+### ROC-AUC:
 ~0.64
 
-#### Key metrics:
+### Key metrics:
 - recall for readmitted patients: ~0.55
 - precision: ~0.17
 
@@ -286,7 +286,7 @@ A lot of false positives remain.
 
 ---
 
-### Most important modeling observation
+## Most important modeling observation
 
 The most interesting part was not actually model performance.
 
@@ -309,7 +309,7 @@ made the pattern feel more credible.
 
 ---
 
-### Shift in interpretation
+## Shift in interpretation
 
 At this point, my interpretation became less patient-only focused.
 
@@ -328,7 +328,7 @@ But it consistently appears throughout the project so far.
 
 ---
 
-### Current working hypothesis
+## Current working hypothesis
 
 Current working idea:
 
@@ -338,7 +338,7 @@ That became the central narrative emerging from the project.
 
 ---
 
-### What I still want to test
+## What I still want to test
 
 The next important step is checking whether:
 - tree-based models
@@ -351,14 +351,14 @@ If they do, that strengthens the interpretation considerably.
 
 ---
 
-### Overall Reflection So Far
+## Overall Reflection So Far
 
 This project has gradually become more about:
 > understanding what hospital readmissions actually represent in healthcare data.
 
 That shift ended up being much more interesting than I expected going in.
 
-## Day 5 – After Initial Modeling Reflections
+# Day 5 – After Initial Modeling Reflections
 
 After building both Logistic Regression and Random Forest models, my understanding of the dataset shifted slightly.
 
@@ -374,3 +374,76 @@ However, the modeling results also highlighted a limitation:
 even when signal exists, separating high-risk patients is not straightforward in this dataset.
 
 At this point, I’m starting to think that readmission risk is not just a patient-level prediction problem, but also reflects system-level interaction patterns and class imbalance effects that standard models struggle with.
+
+---
+
+# Day 6 - Threshold Tuning + Model Interpretation
+
+## What changed today
+
+Instead of immediately abandoning the Random Forest model, I experimented with threshold tuning.
+
+I lowered the classification threshold:
+- from 0.50
+- to 0.30
+
+---
+
+## Outcome
+
+- Recall improved modestly
+- Precision decreased
+- More high-risk patients were identified
+
+The improvement itself was not huge.
+
+But the important part was understanding:
+- why the tradeoff happened
+- and how healthcare priorities affect model evaluation
+
+---
+
+# Biggest realization so far
+
+At this point, the project stopped feeling like:
+> “which model gets the best score?”
+
+and started feeling more like:
+> “what kind of mistakes matter most in healthcare prediction?”
+
+That distinction changed how I interpreted everything afterward.
+
+A false negative:
+- missing a potentially high-risk patient
+
+may matter much more clinically than:
+- generating additional false positives
+
+That perspective made threshold tuning feel much more meaningful than just another modeling trick.
+
+---
+
+# Current understanding of the dataset
+
+Right now, my working interpretation is:
+
+readmission risk in this dataset appears heavily connected to patterns of healthcare utilization and repeated system interaction.
+
+That does NOT mean utilization causes readmission.
+
+But it consistently appears to carry predictive signal more strongly than many demographic variables.
+
+I still want to test whether that pattern holds under:
+- stronger models
+- feature importance analysis
+- and future validation work.
+
+---
+
+# Questions I still have
+
+- Are utilization variables partially acting as severity proxies?
+- How much hospital-level variation exists?
+- Would grouped diagnosis categories improve performance?
+- Is missingness itself predictive?
+- Can minority-class prediction improve substantially with better models?
