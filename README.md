@@ -78,21 +78,34 @@ This GitHub version is a cleaner, more structured write-up of that same process,
 
 ## Current Project Status (End of Day 6 – Modeling Part 3)
 
-Model Improvements: Threshold Tuning
+### XGBoost Model + Deeper Evaluation
 
-After evaluating the Random Forest results, I tested threshold tuning instead of relying only on the default 0.5 classification cutoff.
+Today I implemented and evaluated an XGBoost model as part of the main modeling comparison (Logistic Regression, Random Forest, and now XGBoost).
 
-### Adjustment
-- Lowered prediction threshold:
-  - from 0.50
-  - to 0.30
+The goal was to see whether a more powerful gradient boosting approach could meaningfully improve detection of 30-day readmissions beyond the earlier models.
 
-### Outcome
-- Recall improved modestly
-- Precision decreased (expected tradeoff)
-- More high-risk patients were identified
 
-Even though the improvement was not dramatic, this step felt important because it shifted the project to thinking about how model decisions behave in real healthcare scenarios.
+### What I worked on
+
+- Trained an XGBoost classifier on the engineered feature set (~2418 features)
+- Fixed feature alignment issues between train/test splits after one-hot encoding
+- Evaluated model performance using:
+  - ROC-AUC
+  - precision / recall
+  - confusion matrix
+- Compared results directly against Logistic Regression and Random Forest
+- Started interpreting feature importance outputs from the boosted model
+
+### Key takeaway from XGBoost
+
+A clear pattern showed up:
+
+> Even with a stronger model like XGBoost, class imbalance still dominates performance on the minority class.
+
+This reinforced something I started noticing earlier in the project:
+model complexity alone does not solve the core issue in this dataset.
+
+The signal is there, but it is not easily translated into correct classification of readmitted patients without additional steps (threshold tuning, weighting, etc.).
 
 ---
 

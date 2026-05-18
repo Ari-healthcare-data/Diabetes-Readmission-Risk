@@ -446,4 +446,133 @@ I still want to test whether that pattern holds under:
 - How much hospital-level variation exists?
 - Would grouped diagnosis categories improve performance?
 - Is missingness itself predictive?
+
+---
+
+# Day 7 - Modeling Expansion (XGBoost + Evaluation Deepening)
+
+## What I worked on today
+
+Today I added a third model into the mix: XGBoost.
+
+This was less about “just trying another algorithm” and more about seeing whether a stronger boosting model actually changes the story I’ve been seeing so far, or if it just confirms the same pattern with slightly better scores.
+
+Up to now I’ve mostly been comparing models in a pretty standard way (ROC-AUC, recall, precision). Today felt like a small shift in how I was looking at things, more focus on what the model is actually doing with the minority class, not just overall performance.
+
+---
+
+## What changed today (this felt important)
+
+The shift today was basically this:
+
+- before: “which model performs best overall?”
+- now: “which model is actually useful for identifying readmitted patients?”
+
+That second question sounds simple, but it changes how you read every metric.
+
+Especially in this dataset.
+
+---
+
+## XGBoost modeling work
+
+I trained an XGBoost classifier on the full engineered dataset (~2418 features), and compared it directly against Logistic Regression and Random Forest.
+
+Main steps:
+
+- trained XGBoost using the same train/test split as earlier models (kept things consistent on purpose)
+- handled a few feature alignment issues from one-hot encoding (this took longer than expected)
+- evaluated using:
+  - ROC-AUC
+  - precision
+  - recall
+  - confusion matrix
+- compared outputs side-by-side with previous models
+
+Nothing too exotic here, but I wanted a fair comparison rather than tuning XGBoost in isolation.
+
+---
+
+## Key results (high-level)
+
+- XGBoost gave the best ROC-AUC so far (~0.69-ish)
+- recall for the minority class is still… honestly quite low
+- predictions are still heavily skewed toward the majority class
+- performance changes more with threshold than with model choice itself
+
+So in a way, the “best model wins” idea is not really holding up here.
+
+---
+
+## Important observation: model comparison is not enough
+
+One thing that became clearer today is that ROC-AUC alone is not telling the full story.
+
+Even though XGBoost ranks patients better overall, it still doesn’t reliably surface readmitted patients unless I start adjusting thresholds.
+
+So there’s this gap:
+
+- ROC-AUC → “model ranks risk reasonably well”
+- but reality → “still misses a lot of actual positives”
+
+That gap feels important in a healthcare context.
+
+---
+
+## Feature behavior (consistency check)
+
+What stood out again (and this is becoming a pattern now) is that the same feature groups keep showing up everywhere:
+
+- `number_inpatient`
+- `number_emergency`
+- medication-related variables (especially insulin changes)
+- general utilization intensity features
+
+It doesn’t really matter which model I use, these features stay near the top.
+
+Across:
+- EDA
+- statistical tests
+- Logistic Regression
+- Random Forest
+- XGBoost
+
+…the story is surprisingly consistent.
+
+At this point, it’s hard to ignore that.
+
+---
+
+## Current interpretation update
+
+My current (still evolving) interpretation is:
+
+> readmission risk in this dataset seems strongly tied to prior healthcare utilization patterns, but actual patient-level prediction is still constrained by imbalance and overlapping signals.
+
+Not saying this is causal, it’s just what keeps showing up no matter what method I use.
+
+---
+
+## Challenges I’m noticing more clearly now
+
+A few things are becoming harder to ignore:
+
+- class imbalance is basically steering most model behavior
+- feature space is still very high-dimensional (and kind of messy to interpret)
+- model improvements are incremental, not dramatic
+- thresholds matter almost as much as the model itself
+
+That last point is starting to feel more important than I expected.
+
+---
+
+## What I’m thinking about next
+
+Going forward, I want to:
+
+- move into more structured precision-recall threshold tuning (instead of guessing 0.3 / 0.5 manually)
+- test whether XGBoost class weighting / scale_pos_weight changes recall meaningfully
+- re-evaluate all models using a consistent decision threshold framework
+- start thinking more seriously about what “final model selection” actually means here (because ROC-AUC alone is not enough)
+
 - Can minority-class prediction improve substantially with better models?

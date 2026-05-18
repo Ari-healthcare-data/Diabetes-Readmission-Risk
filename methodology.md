@@ -197,6 +197,99 @@ That tradeoff became much more tangible during threshold tuning.
 
 ---
 
+That tradeoff became much more tangible during threshold tuning.
+
+### 7d - XGBoost
+
+After building Logistic Regression and Random Forest models, I added XGBoost as a third modeling approach to see whether a more advanced boosting method could meaningfully improve performance on this dataset.
+
+At this stage, the goal wasn’t just “better accuracy”, it was more about checking whether a stronger model would actually change the underlying pattern I had been seeing, or just reinforce the same story with slightly better metrics.
+
+
+#### Model setup
+
+I trained an XGBoost classifier on the full engineered dataset (~2418 features), using the same train/test split as previous models to keep comparisons consistent.
+
+Key steps included:
+
+- training XGBoost on the same feature set used for Logistic Regression and Random Forest
+- resolving feature alignment issues caused by one-hot encoding
+- keeping preprocessing consistent across all models for fair comparison
+- evaluating using:
+  - ROC-AUC
+  - precision
+  - recall
+  - confusion matrix
+
+I didn’t do heavy hyperparameter tuning at this stage — I wanted a relatively “baseline XGBoost” to compare behavior rather than optimize it too aggressively.
+
+
+#### Results 
+
+- XGBoost produced the best ROC-AUC so far (~0.69 range)
+- however, recall for the minority class remained very low
+- predictions were still heavily biased toward the majority class
+- performance still depended more on threshold choice than model choice itself
+
+So while the ranking ability improved, the actual ability to *catch readmitted patients* didn’t improve nearly as much.
+
+
+#### Important observation: stronger models ≠ better decisions
+
+One thing that became clearer after introducing XGBoost is that model strength (in terms of ROC-AUC) does not directly translate into better real-world usefulness in this problem.
+
+Even though XGBoost ranked patients better overall, it still struggled to identify enough positive cases without adjusting the decision threshold.
+
+This reinforced a key point that has been showing up throughout modeling:
+
+> improving the model does not automatically solve class imbalance.
+
+The imbalance problem is still doing most of the heavy lifting in terms of shaping predictions.
+
+
+#### Feature consistency check
+
+One encouraging thing was that feature importance patterns stayed very consistent even with XGBoost.
+
+The same variables kept appearing across all models:
+
+- `number_inpatient`
+- `number_emergency`
+- medication-related variables (especially insulin changes)
+- overall utilization intensity features
+
+This consistency across:
+- EDA
+- statistical testing
+- Logistic Regression
+- Random Forest
+- XGBoost
+
+gives more confidence that these signals are not model-specific artifacts, but actually stable patterns in the dataset.
+
+
+#### Interpretation update
+
+At this point, my understanding has become more structured:
+
+> readmission risk appears strongly associated with prior healthcare utilization, but predicting it accurately at the individual level is still limited by class imbalance and overlapping patient factors.
+
+This is not a causal statement, but it is a consistent pattern across all methods used so far.
+
+
+#### What this changed in my thinking
+
+XGBoost didn’t drastically change the direction of the project, but it did reinforce something important:
+
+- model complexity is not the main bottleneck here
+- the main challenges are:
+  - imbalance
+  - feature overlap
+  - and threshold sensitivity
+
+
+---
+
 ## Step 8 - Thinking ahead to SQL layer
 
 I haven’t built the SQL part yet, but I’m planning to use PostgreSQL to simulate more of a hospital reporting environment.
