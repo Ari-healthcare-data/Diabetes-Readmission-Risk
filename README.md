@@ -76,36 +76,24 @@ This GitHub version is a cleaner, more structured write-up of that same process,
 
 ---
 
-## Current Project Status (End of Day 6 – Modeling Part 3)
+## Current Project Status (End of Day 8 — Modeling Part 5)
 
-### XGBoost Model + Deeper Evaluation
+### Modeling + Decision Evaluation Phase Completed
 
-Today I implemented and evaluated an XGBoost model as part of the main modeling comparison (Logistic Regression, Random Forest, and now XGBoost).
+At this stage, the core modeling phase has been completed.
 
-The goal was to see whether a more powerful gradient boosting approach could meaningfully improve detection of 30-day readmissions beyond the earlier models.
+Three models were evaluated:
+- Logistic Regression (baseline)
+- Random Forest
+- XGBoost
 
-
-### What I worked on
-
-- Trained an XGBoost classifier on the engineered feature set (~2418 features)
-- Fixed feature alignment issues between train/test splits after one-hot encoding
-- Evaluated model performance using:
-  - ROC-AUC
-  - precision / recall
-  - confusion matrix
-- Compared results directly against Logistic Regression and Random Forest
-- Started interpreting feature importance outputs from the boosted model
-
-### Key takeaway from XGBoost
-
-A clear pattern showed up:
-
-> Even with a stronger model like XGBoost, class imbalance still dominates performance on the minority class.
-
-This reinforced something I started noticing earlier in the project:
-model complexity alone does not solve the core issue in this dataset.
-
-The signal is there, but it is not easily translated into correct classification of readmitted patients without additional steps (threshold tuning, weighting, etc.).
+Evaluation included:
+- ROC-AUC comparison
+- confusion matrices
+- classification reports
+- feature importance analysis
+- precision-recall analysis
+- threshold optimization
 
 ---
 

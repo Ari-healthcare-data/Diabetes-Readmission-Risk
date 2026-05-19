@@ -287,6 +287,24 @@ XGBoost didn’t drastically change the direction of the project, but it did rei
   - feature overlap
   - and threshold sensitivity
 
+### 7e — Precision-Recall Analysis
+
+Instead of relying only on ROC-AUC or accuracy, I started focusing more directly on:
+- minority-class behavior
+- recall tradeoffs
+- threshold sensitivity
+
+Built:
+- precision-recall curves
+- threshold comparisons
+
+Main realization:
+> threshold choice affected outcomes almost as much as model choice itself.
+
+This shifted the project away from:
+- “which model wins?”
+and more toward:
+- “which prediction behavior is actually useful?”
 
 ---
 

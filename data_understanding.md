@@ -576,3 +576,61 @@ Going forward, I want to:
 - start thinking more seriously about what “final model selection” actually means here (because ROC-AUC alone is not enough)
 
 - Can minority-class prediction improve substantially with better models?
+
+---
+
+# Day 8 — Precision-Recall Analysis + Modeling Reflection
+
+This phase felt like the biggest conceptual shift so far.
+
+Instead of focusing mainly on:
+- algorithms
+- accuracy
+- leaderboard-style comparison
+
+I started focusing more on:
+- decision thresholds
+- minority-class behavior
+- healthcare usefulness
+
+Built:
+- precision-recall curves
+- threshold comparison analysis
+- F1-based threshold optimization
+
+Main realization:
+the default 0.5 threshold is not automatically appropriate for imbalanced healthcare prediction.
+
+That sounds obvious in hindsight, but seeing it directly in the model outputs made it feel much more concrete.
+
+---
+
+## Biggest modeling takeaway so far
+
+At this point, my strongest overall takeaway is probably:
+
+> model evaluation only becomes meaningful once you define what kind of errors matter most.
+
+In this dataset:
+- missing high-risk patients may be costly
+- while extra false positives may sometimes be acceptable
+
+That perspective completely changes how performance should be interpreted.
+
+---
+
+## Current Working Interpretation
+
+The most stable pattern throughout the project so far is:
+
+> patients with higher prior healthcare utilization consistently show elevated readmission risk.
+
+This pattern survived:
+- EDA
+- statistical testing
+- Logistic Regression
+- Random Forest
+- XGBoost
+
+I’m treating this as an observed association, not a causal claim.
+
