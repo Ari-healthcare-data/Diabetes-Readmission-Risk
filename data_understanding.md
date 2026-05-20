@@ -634,3 +634,60 @@ This pattern survived:
 
 I’m treating this as an observed association, not a causal claim.
 
+---
+
+# Day 9 — Healthcare Interpretation Phase
+
+This stage felt different from the earlier technical work.
+
+Instead of mostly building models, I focused more on:
+- interpretation
+- healthcare context
+- explaining tradeoffs
+- understanding what the models might actually represent
+
+---
+
+## Strongest overall pattern
+
+The most stable finding throughout the project so far is:
+
+> patients with higher prior healthcare utilization consistently show elevated readmission risk.
+
+This remained true across:
+- EDA
+- statistical testing
+- Logistic Regression
+- Random Forest
+- XGBoost
+
+I’m treating this as:
+- an observed association
+- not a causal statement
+
+---
+
+## Biggest conceptual shift
+
+Probably the biggest shift in my thinking was this:
+
+At first:
+> “Can I predict readmission?”
+
+Now:
+> “What kind of healthcare behavior is this model actually detecting?”
+
+That question ended up being much more interesting.
+
+---
+
+## Current understanding
+
+Right now, my working interpretation is:
+
+readmission risk in this dataset appears strongly connected to utilization history and repeated healthcare interaction patterns, while accurate individual-level prediction remains difficult because of:
+- class imbalance
+- overlapping patient characteristics
+- and noisy healthcare data structures
+
+

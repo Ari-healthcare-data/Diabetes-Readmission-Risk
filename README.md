@@ -76,24 +76,16 @@ This GitHub version is a cleaner, more structured write-up of that same process,
 
 ---
 
-## Current Project Status (End of Day 8 — Modeling Part 5)
+## Current Interpretation (End of Day 9)
 
-### Modeling + Decision Evaluation Phase Completed
+My current working interpretation is:
 
-At this stage, the core modeling phase has been completed.
+> readmission risk in this dataset appears strongly associated with prior healthcare utilization patterns, while accurate individual-level prediction remains limited by class imbalance and overlapping patient characteristics.
 
-Three models were evaluated:
-- Logistic Regression (baseline)
-- Random Forest
-- XGBoost
+This is an observational finding, not a causal claim.
 
-Evaluation included:
-- ROC-AUC comparison
-- confusion matrices
-- classification reports
-- feature importance analysis
-- precision-recall analysis
-- threshold optimization
+But it remained surprisingly stable across every stage of the project.
+
 
 ---
 
