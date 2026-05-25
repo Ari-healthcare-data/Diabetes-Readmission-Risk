@@ -164,13 +164,13 @@ After evaluating the Random Forest output, I tested threshold tuning instead of 
 Adjusted threshold:
 - 0.50 → 0.30
 
-## Why this mattered
+#### Why this mattered
 
 The default threshold was heavily favoring the majority class.
 
 Lowering the threshold increased sensitivity toward the minority class.
 
-### Result
+#### Result
 - recall improved modestly
 - precision decreased
 - more high-risk patients were identified
@@ -195,16 +195,11 @@ In healthcare:
 
 That tradeoff became much more tangible during threshold tuning.
 
----
-
-That tradeoff became much more tangible during threshold tuning.
-
 ### 7d - XGBoost
 
 After building Logistic Regression and Random Forest models, I added XGBoost as a third modeling approach to see whether a more advanced boosting method could meaningfully improve performance on this dataset.
 
 At this stage, the goal wasn’t just “better accuracy”, it was more about checking whether a stronger model would actually change the underlying pattern I had been seeing, or just reinforce the same story with slightly better metrics.
-
 
 #### Model setup
 
@@ -308,16 +303,33 @@ and more toward:
 
 ---
 
-## Step 8 - Thinking ahead to SQL layer
+## Step 8 -SQL
 
-I haven’t built the SQL part yet, but I’m planning to use PostgreSQL to simulate more of a hospital reporting environment.
+### 8.1 SQL validation layer
 
-The idea is to eventually build queries around things like:
-- readmission rates by patient group
-- utilization summaries
-- hospital-level aggregations
+This is a new phase added in Day 10.
 
-Right now this is still in the planning stage.
+What changed:
+
+Instead of only trusting Python outputs, I started validating patterns using SQL directly on the database.
+
+First SQL checks:
+- total row count (101,766)
+- readmission rate (~11%)
+- inpatient visit distributions
+- age distributions
+
+
+Key SQL insight at this point:
+
+A consistent pattern emerged:
+
+> readmission rate increases steadily with prior inpatient visits
+
+This confirmed earlier findings from:
+- EDA
+- statistical testing
+- modeling
 
 ---
 

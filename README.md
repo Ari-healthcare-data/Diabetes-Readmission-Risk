@@ -76,16 +76,43 @@ This GitHub version is a cleaner, more structured write-up of that same process,
 
 ---
 
-## Current Interpretation (End of Day 9)
+## Work Completed So Far (Summary)
 
-My current working interpretation is:
+### Python Phase (Days 1–9)
+- EDA and data cleaning
+- Feature engineering (~2418 features after encoding)
+- Statistical testing (chi-square, t-tests)
+- Baseline + Random Forest + XGBoost models
+- Threshold tuning and precision-recall analysis
 
-> readmission risk in this dataset appears strongly associated with prior healthcare utilization patterns, while accurate individual-level prediction remains limited by class imbalance and overlapping patient characteristics.
+### SQL Phase (STARTED Day 10)
+- PostgreSQL database setup (`hospital_readmission_db`)
+- Created `diabetic_data` table
+- Verified schema via `information_schema`
+- Built first exploration queries in SQL (01_data_exploration.sql)
 
-This is an observational finding, not a causal claim.
+---
 
-But it remained surprisingly stable across every stage of the project.
+## SQL Work (Day 10 – First Step)
 
+I started translating earlier Python findings into SQL to validate that the patterns still hold at the raw data level.
+
+Key checks included:
+- dataset size (101,766 rows)
+- patient vs encounter uniqueness
+- readmission distribution (~11% positive class)
+- missingness patterns (race, payer_code, specialty)
+- age distribution
+- utilization distributions
+
+### First strong SQL-confirmed insight:
+
+Readmission rate increases steadily with prior inpatient visits.
+
+- 0 prior inpatient visits: ~8% readmission
+- 5+ prior inpatient visits: 30%+ readmission rates
+
+This matched what I saw in Python, but seeing it directly in SQL made it feel more grounded.
 
 ---
 
@@ -156,6 +183,17 @@ That became increasingly important as I move throughout the project.
 
 ---
 
+## Modeling Work
+
+### Model performance summary:
+
+- Logistic Regression: baseline signal detection
+- Random Forest: weak minority recall
+- XGBoost: best ranking performance (~0.69 ROC-AUC)
+- Precision-recall analysis showed threshold dependency is critical
+
+---
+
 ## Limitations
 
 This is important to acknowledge:
@@ -172,6 +210,7 @@ This is important to acknowledge:
 
 - Python (pandas, numpy, scipy, sklearn, matplotlib, seaborn) 
 - Jupyter Notebook
+- PostgreSQL (pgAdmin4)
 - Excel
 
 ---
@@ -187,6 +226,7 @@ diabetes-readmission-risk/
 - requirements.txt
 - data/
 - notebooks/
+- sql/
 ```
 
 Note: The fully encoded feature dataset (`diabetic_features.csv`) is not included in the repository due to file size constraints. It can be recreated by running `02-feature-engineering.ipynb`.

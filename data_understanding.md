@@ -690,4 +690,42 @@ readmission risk in this dataset appears strongly connected to utilization histo
 - overlapping patient characteristics
 - and noisy healthcare data structures
 
+# Day 10 SQL validation layer
+
+After loading data into PostgreSQL and running initial exploration queries, I validated earlier findings.
+
+### Confirmed patterns:
+- class imbalance (~11% readmitted)
+- strong skew in inpatient visit distribution
+- clear utilization differences between patient groups
+
+### Key SQL insight so far:
+
+Readmission rate increases steadily with prior inpatient visits:
+
+- 0 visits: ~8%
+- 5+ visits: 30%+
+
+This was one of the strongest and most stable patterns in the entire dataset so far.
+
+---
+
+## Updated understanding (after SQL)
+
+At this point, my understanding shifted slightly:
+
+Instead of thinking: patients differ demographically
+
+I’m now thinking more: patients differ mainly in how often they interact with the healthcare system
+
+That interaction history seems to carry more signal than static attributes.
+
+---
+
+## Questions I have
+
+- Is utilization a proxy for severity or access?
+- Are we measuring patient health or hospital exposure?
+- How much signal is hidden in missingness patterns?
+
 
