@@ -60,15 +60,15 @@ Most of the early exploration for this project was done on my local system and i
 
 **Kaggle Notebooks:**
 
-- [01_eda](https://www.kaggle.com/code/datascienceam/diabetes-readmission-risk-01-eda)
+- [01_eda](https://www.kaggle.com/code/datascienceam/01-eda)
 
-- [02_feature_engineering](https://www.kaggle.com/code/datascienceam/diabetes-readmission-risk-02-feature-engineering)
+- [02_feature_engineering](https://www.kaggle.com/code/datascienceam/02-feature-engineering)
 
-- [03_stat_analysis](https://www.kaggle.com/code/datascienceam/diabetes-readmission-risk-03-stat-analysis)
+- [03_stat_analysis](https://www.kaggle.com/code/datascienceam/03-stat-analysis)
 
-- [04_ modeling](https://www.kaggle.com/code/datascienceam/diabetes-readmission-risk-04-modeling)
+- [04_ modeling](https://www.kaggle.com/code/datascienceam/04-modeling)
 
-Note on Reproducibility: Minor variations in results may occur due to environment differences (local vs Kaggle), but overall findings remain consistent across runs.
+NOTE on Reproducibility: Minor variations in results may occur due to environment differences (local vs Kaggle), but overall findings remain consistent across runs.
 
 The Kaggle notebooks and on my local system  are where I worked through the messy part of the analysis, getting a feel for the data, testing cleaning decisions, and doing some quick visual checks to understand what was going on.
 
@@ -86,33 +86,24 @@ This GitHub version is a cleaner, more structured write-up of that same process,
 - Threshold tuning and precision-recall analysis
 
 ### SQL Phase (STARTED Day 10)
-- PostgreSQL database setup (`hospital_readmission_db`)
-- Created `diabetic_data` table
-- Verified schema via `information_schema`
-- Built first exploration queries in SQL (01_data_exploration.sql)
+Completed SQL files:
+- `01_data_exploration.sql`
+- `02_readmission_metrics.sql`
 
 ---
 
-## SQL Work (Day 10 – First Step)
+## Current Progress (End of Day 11)
 
-I started translating earlier Python findings into SQL to validate that the patterns still hold at the raw data level.
+### Completed
+- Baseline machine learning models
+- SQL database setup
+- Readmission KPI development
+- Demographic readmission analysis
 
-Key checks included:
-- dataset size (101,766 rows)
-- patient vs encounter uniqueness
-- readmission distribution (~11% positive class)
-- missingness patterns (race, payer_code, specialty)
-- age distribution
-- utilization distributions
-
-### First strong SQL-confirmed insight:
-
-Readmission rate increases steadily with prior inpatient visits.
-
-- 0 prior inpatient visits: ~8% readmission
-- 5+ prior inpatient visits: 30%+ readmission rates
-
-This matched what I saw in Python, but seeing it directly in SQL made it feel more grounded.
+### Currently Working On
+- deeper utilization analysis in SQL
+- healthcare utilization drivers
+- dashboard preparation
 
 ---
 

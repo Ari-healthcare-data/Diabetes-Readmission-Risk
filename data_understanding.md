@@ -690,7 +690,9 @@ readmission risk in this dataset appears strongly connected to utilization histo
 - overlapping patient characteristics
 - and noisy healthcare data structures
 
-# Day 10 SQL validation layer
+---
+
+# Day 10 - SQL validation layer
 
 After loading data into PostgreSQL and running initial exploration queries, I validated earlier findings.
 
@@ -728,4 +730,86 @@ That interaction history seems to carry more signal than static attributes.
 - Are we measuring patient health or hospital exposure?
 - How much signal is hidden in missingness patterns?
 
+---
+
+# Day 11 - KPI Development & Readmission Metrics
+
+## Main work completed
+
+Created:
+`02_readmission_metrics.sql`
+
+This phase felt different from earlier exploration work because I started thinking more like:
+- an analyst building healthcare KPIs
+rather than:
+- someone only running exploratory SQL queries.
+
+---
+
+## SQL metrics created
+
+### Overall readmission rate
+~11.16%
+
+---
+
+### Readmission class distribution
+- ~88.84% non-readmitted
+- ~11.16% readmitted
+
+This reinforced the imbalance issue seen during modeling.
+
+---
+
+### Readmission by age
+Aging trends were mostly gradual and expected.
+
+But again:
+the 20–30 group remained somewhat elevated relative to neighboring ranges.
+
+Still worth revisiting later.
+
+---
+
+### Readmission by gender
+Very small differences overall.
+
+---
+
+### Readmission by race
+Differences existed but were relatively modest.
+
+Compared to utilization variables, demographic variables still appear weaker overall.
+
+---
+
+## Biggest analytical takeaway from Day 11
+
+At this point, utilization variables appear consistently stronger than demographics across:
+- SQL
+- statistics
+- and machine learning models
+
+Especially:
+- inpatient visit history
+
+That pattern keeps surviving every validation layer.
+
+---
+
+# Current Overall Understanding (End of Day 11)
+
+My current understanding is that this dataset is capturing several overlapping things simultaneously:
+
+- patient complexity
+- healthcare utilization intensity
+- repeated healthcare system interaction
+- operational hospital patterns
+
+The hardest part analytically is separating:
+- patient-level risk
+from
+- system-level utilization behavior.
+
+That distinction feels central to the project now.
 

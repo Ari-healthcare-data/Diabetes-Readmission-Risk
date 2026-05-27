@@ -305,7 +305,7 @@ and more toward:
 
 ## Step 8 -SQL
 
-### 8.1 SQL validation layer
+### 8.1 SQL validation layer (`01_data_exploration.sql`)
 
 This is a new phase added in Day 10.
 
@@ -319,7 +319,6 @@ First SQL checks:
 - inpatient visit distributions
 - age distributions
 
-
 Key SQL insight at this point:
 
 A consistent pattern emerged:
@@ -330,6 +329,35 @@ This confirmed earlier findings from:
 - EDA
 - statistical testing
 - modeling
+
+### 8.2 KPIs & Readmission Metrics (`02_readmission_metrics.sql`)
+Focused on:
+- overall readmission KPIs
+- demographic readmission breakdowns
+- class imbalance metrics
+- age/gender/race comparisons
+
+#### Known Challenges
+
+Main analytical challenges:
+- class imbalance
+- high-dimensional encoded features
+- healthcare data missingness
+- diagnosis code complexity
+- threshold sensitivity
+- separating utilization from severity
+
+
+#### Known Limitations
+
+Important limitations:
+- observational dataset only
+- no causal interpretation
+- no distinction between planned/unplanned readmissions
+- limited socioeconomic context
+- possible hospital-level variation
+- missingness may carry hidden signal
+- no longitudinal patient timeline
 
 ---
 
