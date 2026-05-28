@@ -89,21 +89,21 @@ This GitHub version is a cleaner, more structured write-up of that same process,
 Completed SQL files:
 - `01_data_exploration.sql`
 - `02_readmission_metrics.sql`
+- `03_utilization_analysis.sql`
 
 ---
 
-## Current Progress (End of Day 11)
+## Current Progress (End of Day 12)
 
-### Completed
-- Baseline machine learning models
-- SQL database setup
-- Readmission KPI development
-- Demographic readmission analysis
-
-### Currently Working On
-- deeper utilization analysis in SQL
-- healthcare utilization drivers
-- dashboard preparation
+### What I worked on today
+Built a full utilization analysis layer in SQL focusing on:
+- inpatient utilization patterns
+- emergency visit trends
+- outpatient visit behavior
+- medication burden
+- medication change behavior
+- length of hospital stay
+- combined utilization comparison
 
 ---
 

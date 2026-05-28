@@ -813,3 +813,110 @@ from
 
 That distinction feels central to the project now.
 
+---
+
+# Day 12 - Utilization Analysis (SQL Layer)
+
+This was the first time I fully structured utilization analysis across multiple dimensions instead of looking at variables independently.
+
+---
+
+## What I analyzed
+
+Using SQL, I examined:
+
+- inpatient visits vs readmission rate
+- emergency visit patterns
+- outpatient visit behavior
+- medication count trends
+- medication change behavior
+- length of hospital stay
+- combined utilization comparison
+
+---
+
+## Key Observations
+
+### 1. Inpatient utilization dominates
+
+This is the clearest signal in the dataset.
+
+- 0 inpatient visits: ~8% readmission rate
+- 5+ inpatient visits: 30%+ readmission rate
+
+The relationship is:
+- monotonic
+- stable
+- consistent across methods
+
+---
+
+### 2. Emergency visits are noisy
+
+There is a trend, but:
+- high variability at upper ranges
+- small sample sizes distort stability
+
+---
+
+### 3. Outpatient visits are flat
+
+No meaningful pattern emerged.
+
+This was surprising initially, but consistent across checks.
+
+---
+
+### 4. Medication burden shows gradual signal
+
+More medications might lead to slightly higher readmission risk
+
+But:
+- weak signal
+- likely indirect proxy for complexity
+
+---
+
+### 5. Medication change adds nuance
+
+Patients with medication changes show slightly higher readmission rates.
+
+This likely reflects:
+> treatment instability or higher complexity rather than causation
+
+---
+
+### 6. Length of stay shows mild association
+
+Longer stays → slightly higher readmission risk
+
+But effect is modest.
+
+---
+
+### 7. Combined utilization comparison
+
+Readmitted patients consistently show higher averages across all utilization metrics.
+
+---
+
+## Interpretation Shift
+
+Before Day 12:
+> utilization = one feature group among many
+
+After Day 12:
+> utilization = structural representation of healthcare system interaction
+
+This is still an interpretation, not a conclusion.
+
+---
+
+## Open Question
+
+The key unresolved question now is:
+
+> are we measuring patient health severity, or healthcare system exposure patterns?
+
+At this point, the dataset does not clearly separate the two.
+

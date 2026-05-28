@@ -361,6 +361,39 @@ Important limitations:
 
 ---
 
+## Step 8.3 - Utilization analysis (Day 12)
+
+Built `03_utilization_analysis.sql`
+
+Analyzed:
+- inpatient visits
+- emergency visits
+- outpatient visits
+- medication count
+- medication change
+- length of stay
+- combined utilization comparison
+
+###  Key SQL Finding
+
+> inpatient utilization is the most stable and consistent predictor of readmission risk
+
+
+### Current Interpretation
+
+- utilization patterns dominate signal structure
+- inpatient history is the strongest variable group
+- outpatient usage is weak or inconsistent
+- emergency usage is noisy but directionally positive
+
+###  Ongoing Challenge
+
+The core analytical challenge remains:
+
+> separating patient-level severity from healthcare system interaction behavior
+
+---
+
 
 ## Step 9 - Dashboard development (planned)
 
