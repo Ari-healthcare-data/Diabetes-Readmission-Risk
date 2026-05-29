@@ -253,7 +253,7 @@ I will start with a baseline model (likely logistic regression) and evaluate per
 
 ---
 
-# Day 4 — Baseline Modeling (Logistic Regression)
+# Day 4 - Baseline Modeling (Logistic Regression)
 
 ## What I built
 
@@ -446,6 +446,7 @@ I still want to test whether that pattern holds under:
 - How much hospital-level variation exists?
 - Would grouped diagnosis categories improve performance?
 - Is missingness itself predictive?
+- Can minority-class prediction improve substantially with better models?
 
 ---
 
@@ -575,8 +576,6 @@ Going forward, I want to:
 - re-evaluate all models using a consistent decision threshold framework
 - start thinking more seriously about what “final model selection” actually means here (because ROC-AUC alone is not enough)
 
-- Can minority-class prediction improve substantially with better models?
-
 ---
 
 # Day 8 — Precision-Recall Analysis + Modeling Reflection
@@ -634,9 +633,9 @@ This pattern survived:
 
 I’m treating this as an observed association, not a causal claim.
 
----
+--
 
-# Day 9 — Healthcare Interpretation Phase
+# Day 9 - Healthcare Interpretation Phase
 
 This stage felt different from the earlier technical work.
 
@@ -690,9 +689,7 @@ readmission risk in this dataset appears strongly connected to utilization histo
 - overlapping patient characteristics
 - and noisy healthcare data structures
 
----
-
-# Day 10 - SQL validation layer
+# Day 10 SQL validation layer
 
 After loading data into PostgreSQL and running initial exploration queries, I validated earlier findings.
 
@@ -813,8 +810,6 @@ from
 
 That distinction feels central to the project now.
 
----
-
 # Day 12 - Utilization Analysis (SQL Layer)
 
 This was the first time I fully structured utilization analysis across multiple dimensions instead of looking at variables independently.
@@ -919,4 +914,44 @@ The key unresolved question now is:
 > are we measuring patient health severity, or healthcare system exposure patterns?
 
 At this point, the dataset does not clearly separate the two.
+---
 
+# Day 13 – Risk Cohorts
+
+Today introduced cohort-based thinking.
+
+## New observation:
+
+When grouping patients into utilization-based risk segments:
+
+- inpatient history remains dominant even in combined features
+- medication + length-of-stay add weak incremental separation
+- interaction features do not dramatically change risk ordering
+
+---
+
+## Updated Interpretation
+
+My current interpretation:
+
+> readmission risk behaves like a layered representation of healthcare system interaction intensity rather than a single clinical outcome.
+
+Still:
+- not causal
+- not clinically validated
+- purely observational pattern
+
+---
+
+## Ongoing Questions
+
+- Is utilization a proxy for disease severity or healthcare access?
+- Are we measuring patient condition or system exposure?
+- Would grouping diagnoses improve signal stability?
+- How much of this pattern is hospital-driven vs patient-driven?
+
+---
+
+## Reflection
+
+At this stage, the project feels  more like: understanding how healthcare usage patterns encode risk.

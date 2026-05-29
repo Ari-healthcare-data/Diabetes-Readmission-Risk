@@ -88,7 +88,7 @@ These are not strong conclusions yet, just early signals.
 
 ---
 
-## Step 5: Feature Engineering
+## Step 5 - Feature Engineering
 
 This was the most time-intensive part so far.
 
@@ -282,7 +282,7 @@ XGBoost didn’t drastically change the direction of the project, but it did rei
   - feature overlap
   - and threshold sensitivity
 
-### 7e — Precision-Recall Analysis
+### 7e - Precision-Recall Analysis
 
 Instead of relying only on ROC-AUC or accuracy, I started focusing more directly on:
 - minority-class behavior
@@ -303,9 +303,9 @@ and more toward:
 
 ---
 
-## Step 8 -SQL
+## Step 8 - SQL
 
-### 8.1 SQL validation layer (`01_data_exploration.sql`)
+### 8.1 - SQL validation layer (`01_data_exploration.sql`)
 
 This is a new phase added in Day 10.
 
@@ -330,7 +330,7 @@ This confirmed earlier findings from:
 - statistical testing
 - modeling
 
-### 8.2 KPIs & Readmission Metrics (`02_readmission_metrics.sql`)
+### 8.2 - KPIs & Readmission Metrics (`02_readmission_metrics.sql`)
 Focused on:
 - overall readmission KPIs
 - demographic readmission breakdowns
@@ -359,11 +359,7 @@ Important limitations:
 - missingness may carry hidden signal
 - no longitudinal patient timeline
 
----
-
-## Step 8.3 - Utilization analysis (Day 12)
-
-Built `03_utilization_analysis.sql`
+### Step 8.3 - Utilization analysis (`03_utilization_analysis.sql`)
 
 Analyzed:
 - inpatient visits
@@ -374,26 +370,43 @@ Analyzed:
 - length of stay
 - combined utilization comparison
 
-###  Key SQL Finding
+####  Key SQL Finding
 
 > inpatient utilization is the most stable and consistent predictor of readmission risk
 
 
-### Current Interpretation
+#### Current Interpretation
 
 - utilization patterns dominate signal structure
 - inpatient history is the strongest variable group
 - outpatient usage is weak or inconsistent
 - emergency usage is noisy but directionally positive
 
-###  Ongoing Challenge
+####  Ongoing Challenge
 
 The core analytical challenge remains:
 
 > separating patient-level severity from healthcare system interaction behavior
 
----
 
+### 8.4 - Cohort-Based Risk Segmentation (`04_risk_cohorts.sql`)
+
+####  What changed today
+
+Instead of analyzing variables independently, I started grouping patients into risk cohorts.
+
+#### Cohorts tested:
+- inpatient utilization tiers
+- combined inpatient + medication burden
+- inpatient + length-of-stay interactions
+
+#### Key Findings
+
+- inpatient history remains dominant even in combined models
+- interaction features provide limited additional separation
+- risk is largely driven by utilization frequency, not feature combinations
+
+---
 
 ## Step 9 - Dashboard development (planned)
 

@@ -60,15 +60,15 @@ Most of the early exploration for this project was done on my local system and i
 
 **Kaggle Notebooks:**
 
-- [01_eda](https://www.kaggle.com/code/datascienceam/01-eda)
+- [01_eda](https://www.kaggle.com/code/datascienceam/diabetes-readmission-risk-01-eda)
 
-- [02_feature_engineering](https://www.kaggle.com/code/datascienceam/02-feature-engineering)
+- [02_feature_engineering](https://www.kaggle.com/code/datascienceam/diabetes-readmission-risk-02-feature-engineering)
 
-- [03_stat_analysis](https://www.kaggle.com/code/datascienceam/03-stat-analysis)
+- [03_stat_analysis](https://www.kaggle.com/code/datascienceam/diabetes-readmission-risk-03-stat-analysis)
 
-- [04_ modeling](https://www.kaggle.com/code/datascienceam/04-modeling)
+- [04_ modeling](https://www.kaggle.com/code/datascienceam/diabetes-readmission-risk-04-modeling)
 
-NOTE on Reproducibility: Minor variations in results may occur due to environment differences (local vs Kaggle), but overall findings remain consistent across runs.
+Note on Reproducibility: Minor variations in results may occur due to environment differences (local vs Kaggle), but overall findings remain consistent across runs.
 
 The Kaggle notebooks and on my local system  are where I worked through the messy part of the analysis, getting a feel for the data, testing cleaning decisions, and doing some quick visual checks to understand what was going on.
 
@@ -90,20 +90,30 @@ Completed SQL files:
 - `01_data_exploration.sql`
 - `02_readmission_metrics.sql`
 - `03_utilization_analysis.sql`
+- `04_risk_cohorts.sql`
 
 ---
 
-## Current Progress (End of Day 12)
+## Current Progress (End of Day 13)
 
 ### What I worked on today
-Built a full utilization analysis layer in SQL focusing on:
-- inpatient utilization patterns
-- emergency visit trends
-- outpatient visit behavior
-- medication burden
-- medication change behavior
-- length of hospital stay
-- combined utilization comparison
+
+Today I built the first version of risk cohort segmentation (SQL-based):
+
+- inpatient utilization risk buckets
+- combined utilization risk logic
+- interaction between inpatient history + medication burden
+- interaction between inpatient history + length of stay
+
+The most consistent signal remains:
+
+> inpatient history dominates risk separation, even when combined with other utilization variables.
+
+What stood out today specifically:
+
+- combining features does not significantly outperform inpatient history alone
+- medication and length-of-stay effects are secondary
+- risk separation is mostly driven by prior hospitalization frequency
 
 ---
 
