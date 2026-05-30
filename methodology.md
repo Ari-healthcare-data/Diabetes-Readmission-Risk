@@ -406,6 +406,56 @@ Instead of analyzing variables independently, I started grouping patients into r
 - interaction features provide limited additional separation
 - risk is largely driven by utilization frequency, not feature combinations
 
+### 8.5 - Feature Engineering (`05_feature_engineering.sql`)
+
+This is the final stage added in Day 14 and represents a shift from analysis to structured dataset construction.
+
+#### Approach
+
+Feature engineering was done directly in SQL to ensure:
+- reproducibility
+- consistency across runs
+- alignment with downstream modeling workflows
+
+The goal was not to maximize feature complexity, but to build a clean and interpretable feature layer.
+
+#### Engineered features created
+
+1. Utilization score
+A weighted composite feature:
+
+- inpatient visits weighted highest
+- emergency visits weighted moderately
+- outpatient visits weighted lowest
+
+The purpose is to create a single interpretable signal for overall healthcare utilization intensity.
+
+ 2. Binary risk flags
+
+Created simple threshold-based indicators:
+
+- high_inpatient_flag (≥ 3 inpatient visits)
+- high_emergency_flag (≥ 2 emergency visits)
+- high_medication_flag (≥ 20 medications
+
+3. Utilization risk category
+
+A categorical segmentation feature:
+
+- Low Risk
+- Medium Risk
+- High Risk
+
+#### Key observation
+
+Even after feature engineering, the same pattern remains consistent:
+
+- inpatient utilization is the strongest predictor
+- emergency visits show moderate signal
+- outpatient usage is weak
+- demographics remain relatively low impact
+
+
 ---
 
 ## Step 9 - Dashboard development (planned)

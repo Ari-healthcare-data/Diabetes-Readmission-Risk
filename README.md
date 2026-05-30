@@ -91,30 +91,40 @@ Completed SQL files:
 - `02_readmission_metrics.sql`
 - `03_utilization_analysis.sql`
 - `04_risk_cohorts.sql`
+- `05_feature_engineering.sql`
 
 ---
 
-## Current Progress (End of Day 13)
+## Current Progress (End of Day 14)
 
-### What I worked on today
+### Feature Engineering (SQL Layer)
 
-Today I built the first version of risk cohort segmentation (SQL-based):
+Today I built the first full model-ready feature table in SQL:
 
-- inpatient utilization risk buckets
-- combined utilization risk logic
-- interaction between inpatient history + medication burden
-- interaction between inpatient history + length of stay
+`patient_features`
 
-The most consistent signal remains:
+This included:
 
-> inpatient history dominates risk separation, even when combined with other utilization variables.
+#### Core variables carried forward:
+- encounter_id
+- patient_nbr
+- readmitted_30
+- number_inpatient
+- number_outpatient
+- number_emergency
+- num_medications
+- time_in_hospital
+- age
+- gender
+- race
 
-What stood out today specifically:
-
-- combining features does not significantly outperform inpatient history alone
-- medication and length-of-stay effects are secondary
-- risk separation is mostly driven by prior hospitalization frequency
-
+#### Engineered features:
+- `utilization_score` (weighted composite risk signal)
+- `high_inpatient_flag`
+- `high_emergency_flag`
+- `high_medication_flag`
+- `long_stay_flag`
+- `utilization_risk_category`
 ---
 
 ## EDA

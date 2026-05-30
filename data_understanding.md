@@ -955,3 +955,79 @@ Still:
 ## Reflection
 
 At this stage, the project feels  more like: understanding how healthcare usage patterns encode risk.
+
+---
+
+# Day 14 - Feature Engineering (SQL Layer)
+
+Today marked a shift from analysis-heavy work into structured feature engineering inside SQL.
+
+Up to this point, most of the work had been focused on:
+- understanding patterns in EDA
+- validating them statistically
+- testing them through modeling
+
+But today the focus changed slightly:
+
+> taking what I’ve learned and turning it into a reusable, model-ready dataset.
+
+---
+
+## What I worked on
+
+I created the first structured feature engineering table in SQL:
+
+### `patient_features`
+
+This table is built directly from the raw hospital utilization dataset and includes:
+
+#### Base variables carried forward:
+- encounter_id
+- patient_nbr
+- readmitted_30
+- number_inpatient
+- number_outpatient
+- number_emergency
+- num_medications
+- time_in_hospital
+- age
+- gender
+- race
+
+#### Engineered features:
+- utilization_score (weighted combination of utilization variables)
+- high_inpatient_flag (≥ 3 inpatient visits)
+- high_emergency_flag (≥ 2 emergency visits)
+- high_medication_flag (≥ 20 medications)
+- long_stay_flag (≥ 7 days in hospital)
+- utilization_risk_category (Low / Medium / High)
+
+---
+
+## Key design decision today
+
+One of the main decisions today was keeping feature engineering simple and interpretable.
+
+Instead of building complex transformations or high-dimensional encodings, I focused on:
+
+> creating features that clearly reflect healthcare utilization behavior.
+
+This was intentional because earlier analysis consistently showed that:
+- inpatient history dominates signal strength
+- utilization patterns are more stable than demographics
+- complex feature expansion does not necessarily improve interpretability
+
+---
+
+## What stood out
+
+Even after restructuring the dataset:
+
+- inpatient utilization remains the strongest signal
+- emergency visits contribute moderately
+- medication burden has weaker but noticeable signal
+- outpatient visits remain relatively flat
+
+This consistency across SQL, Python, and modeling continues to reinforce the same overall pattern.
+
+
