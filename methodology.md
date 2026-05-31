@@ -455,6 +455,73 @@ Even after feature engineering, the same pattern remains consistent:
 - outpatient usage is weak
 - demographics remain relatively low impact
 
+### 8.6 - SQL Feature Validation & Iteration (`06_dashboard_views.sql`)
+
+This stage was less about adding new features and more about validating whether the feature engineering layer is actually stable and meaningful.
+
+After building the initial SQL feature table (`patient_features`) in Day 14, Day 15 focused on re-running, checking, and stress-testing those transformations.
+
+#### What I did
+
+- re-executed full feature table creation in PostgreSQL
+- validated aggregation logic for utilization variables
+- checked consistency between SQL outputs and Python-side summaries
+- reviewed risk flag thresholds
+- examined feature correlations and redundancy patterns
+
+#### Key validation checks
+
+1. Utilization score consistency
+
+The weighted utilization score remained stable across runs.
+
+Key structure held:
+- inpatient visits = dominant weight
+- emergency visits = moderate weight
+- outpatient visits = minimal contribution
+
+No structural drift observed.
+
+
+2. Risk flag behavior
+
+Binary flags behaved as expected:
+- high_inpatient_flag strongly aligned with high risk category
+- long_stay_flag showed weaker but consistent alignment
+- high_emergency_flag introduced some noise but remained directionally useful
+
+
+3. Redundancy in engineered features
+
+A key realization during this stage:
+
+Most engineered features are not independent signals.
+
+Instead, they are different transformations of the same underlying concept:
+> healthcare utilization intensity
+
+Examples:
+- utilization_score
+- inpatient count
+- risk category
+- binary inpatient flag
+
+All strongly correlated.
+
+#### Current interpretation shift
+
+At this stage, my understanding is becoming more constrained but clearer:
+
+> most predictive power in this dataset comes from a single underlying dimension: prior healthcare utilization, especially inpatient history
+
+Everything else:
+- demographics
+- labs
+- medications
+- admission details
+
+appears to add smaller incremental variation on top of that structure.
+
 
 ---
 

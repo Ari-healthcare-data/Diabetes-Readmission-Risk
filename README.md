@@ -92,39 +92,42 @@ Completed SQL files:
 - `03_utilization_analysis.sql`
 - `04_risk_cohorts.sql`
 - `05_feature_engineering.sql`
+- `06_dashboard_views.sql`
 
 ---
 
-## Current Progress (End of Day 14)
+## Current Progress (End of Day 15)
 
-### Feature Engineering (SQL Layer)
+### SQL Feature Engineering Refinement (Iteration Phase)
 
-Today I built the first full model-ready feature table in SQL:
+Day 15 focused less on “new features” and more on refining how existing ones behave in a model-ready structure.
 
-`patient_features`
+Main updates:
+- validated `patient_features` consistency across runs
+- rechecked aggregation logic for utilization variables
+- standardized thresholds used in risk flags
+- reviewed feature leakage risks (none critical found, but a few edge cases noted)
+- aligned SQL outputs with Python preprocessing assumptions
 
-This included:
+### Key Observations (Still Holding Strong)
 
-#### Core variables carried forward:
-- encounter_id
-- patient_nbr
-- readmitted_30
-- number_inpatient
-- number_outpatient
-- number_emergency
-- num_medications
-- time_in_hospital
-- age
-- gender
-- race
+Across all layers (EDA → stats → ML → SQL), the same structure keeps appearing:
 
-#### Engineered features:
-- `utilization_score` (weighted composite risk signal)
-- `high_inpatient_flag`
-- `high_emergency_flag`
-- `high_medication_flag`
-- `long_stay_flag`
-- `utilization_risk_category`
+- Inpatient history is the dominant predictor
+- Emergency visits show moderate but unstable signal
+- Outpatient visits remain weak
+- Medication burden adds mild incremental signal
+- Demographics remain relatively low-impact
+
+## Key Challenges So Far
+
+- strong class imbalance (~11%)
+- high-dimensional feature space (~2400+ features)
+- diagnosis encoding complexity
+- missingness patterns that may be informative
+- separating “health severity” vs “system usage”
+- threshold sensitivity across all models
+
 ---
 
 ## EDA

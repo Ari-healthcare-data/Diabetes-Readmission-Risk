@@ -709,7 +709,7 @@ This was one of the strongest and most stable patterns in the entire dataset so 
 
 ---
 
-## Updated understanding (after SQL)
+## Updated understanding 
 
 At this point, my understanding shifted slightly:
 
@@ -810,7 +810,7 @@ from
 
 That distinction feels central to the project now.
 
-# Day 12 - Utilization Analysis (SQL Layer)
+# Day 12 - Utilization Analysis 
 
 This was the first time I fully structured utilization analysis across multiple dimensions instead of looking at variables independently.
 
@@ -958,7 +958,7 @@ At this stage, the project feels  more like: understanding how healthcare usage 
 
 ---
 
-# Day 14 - Feature Engineering (SQL Layer)
+# Day 14 - Feature Engineering 
 
 Today marked a shift from analysis-heavy work into structured feature engineering inside SQL.
 
@@ -1030,4 +1030,101 @@ Even after restructuring the dataset:
 
 This consistency across SQL, Python, and modeling continues to reinforce the same overall pattern.
 
+---
+
+# Day 15 - SQL Validation + Feature Stability Check
+
+Today was less about discovering new patterns and more about checking whether the patterns I’ve been relying on actually hold up when I re-run and validate the SQL feature layer.
+
+It felt more like a “sanity check day” than an exploration day.
+
+---
+
+## What I worked on
+
+- re-ran core SQL feature table (`patient_features`)
+- validated utilization scoring logic
+- checked consistency of risk flags across patient segments
+- compared SQL aggregates vs Python-side summaries
+- looked for drift or inconsistencies in engineered variables
+
+---
+
+## Key findings
+
+### 1. Utilization score remains stable
+
+The weighted utilization score I built earlier is holding up well.
+
+Even after re-running queries:
+- inpatient history still dominates the score
+- emergency visits contribute secondary signal
+- outpatient visits barely move the distribution
+
+No major structural issues found here, which was reassuring.
+
+---
+
+### 2. Risk categories behave as expected
+
+The Low / Medium / High risk segmentation still separates groups cleanly:
+
+- Low risk: mostly zero or low inpatient history
+- Medium risk: mixed outpatient + occasional inpatient usage
+- High risk: strongly inpatient-driven utilization
+
+What stood out again is that:
+> inpatient history alone is often enough to push a patient into “High risk”
+
+Even without other features.
+
+---
+
+### 3. Small inconsistencies noticed (but not breaking anything)
+
+A few things I flagged during validation:
+
+- slight variation in utilization_score distribution depending on aggregation order (minor rounding effects)
+- a couple of edge cases where emergency visits inflate risk category without inpatient history
+- medication-based flags behave inconsistently in borderline cases
+
+None of these are major issues, but they suggest:
+> the feature layer is sensitive to definition thresholds
+
+---
+
+### 4. Feature redundancy is becoming more obvious
+
+One thing that became clearer today:
+
+A lot of engineered features are essentially encoding the same signal in different forms:
+
+- utilization_score
+- high_inpatient_flag
+- risk category
+- raw inpatient count
+
+They are all highly correlated.
+
+This is useful for interpretability, but may:
+- add redundancy in modeling
+- reduce marginal gain from additional features
+
+---
+
+## Interpretation update
+
+At this point, my understanding is stabilizing:
+
+> the dataset is largely structured around repeated healthcare system usage, and most engineered features are different views of that same underlying behavior.
+
+This is not a flaw in the data, but it does limit how much new signal feature engineering can realistically add.
+
+## What I’m starting to question
+
+A few questions came up today:
+
+- Am I over-engineering different representations of the same signal?
+- Would a simpler feature set perform almost the same?
+- Is inpatient history basically acting as a proxy for everything else?
 
