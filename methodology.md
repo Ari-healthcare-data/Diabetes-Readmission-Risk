@@ -301,6 +301,23 @@ This shifted the project away from:
 and more toward:
 - “which prediction behavior is actually useful?”
 
+### Step 7f - Risk Scoring & Decision Support Layer
+
+After evaluating Logistic Regression, Random Forest, and XGBoost, I wanted to move beyond simple classification outputs and explore how model predictions could be translated into a more practical decision-support format.
+
+##### Risk Distribution Analysis
+
+A distribution plot was generated to examine how predicted risk scores were spread across the population.
+
+Several patterns were noticeable:
+
+- most patients clustered in lower-risk ranges
+- medium-risk patients formed a smaller segment
+- high-risk patients represented a relatively small proportion of encounters
+
+This behavior was generally consistent with the underlying class imbalance observed throughout the project.
+
+
 ---
 
 ## Step 8 - SQL

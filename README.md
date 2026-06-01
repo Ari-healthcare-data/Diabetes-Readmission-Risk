@@ -96,37 +96,22 @@ Completed SQL files:
 
 ---
 
-## Current Progress (End of Day 15)
+## Current Progress (End of Day  16)
 
-### SQL Feature Engineering Refinement (Iteration Phase)
+Risk Scoring Layer (New Addition in 04_modeling Kaggle notebook)
 
-Day 15 focused less on “new features” and more on refining how existing ones behave in a model-ready structure.
+Rather than predicting only 0 / 1 readmission outcomes, the model now outputs:
 
-Main updates:
-- validated `patient_features` consistency across runs
-- rechecked aggregation logic for utilization variables
-- standardized thresholds used in risk flags
-- reviewed feature leakage risks (none critical found, but a few edge cases noted)
-- aligned SQL outputs with Python preprocessing assumptions
+- a risk probability score
+- mapped into interpretable clinical categories
 
-### Key Observations (Still Holding Strong)
+Risk logic used:
+- Low risk: < 0.3
+- Medium risk: 0.3 – 0.6
+- High risk: > 0.6
 
-Across all layers (EDA → stats → ML → SQL), the same structure keeps appearing:
 
-- Inpatient history is the dominant predictor
-- Emergency visits show moderate but unstable signal
-- Outpatient visits remain weak
-- Medication burden adds mild incremental signal
-- Demographics remain relatively low-impact
-
-## Key Challenges So Far
-
-- strong class imbalance (~11%)
-- high-dimensional feature space (~2400+ features)
-- diagnosis encoding complexity
-- missingness patterns that may be informative
-- separating “health severity” vs “system usage”
-- threshold sensitivity across all models
+This creates a more practical structure for hospital decision-making, where prioritization matters more than binary classification.
 
 ---
 

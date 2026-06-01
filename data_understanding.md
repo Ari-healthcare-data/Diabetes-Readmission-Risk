@@ -1128,3 +1128,114 @@ A few questions came up today:
 - Would a simpler feature set perform almost the same?
 - Is inpatient history basically acting as a proxy for everything else?
 
+---
+
+# Day 16 - Risk Scoring Interpretation Layer
+
+## What I worked on today
+
+Today was less about improving model performance and more about understanding what the model output actually represents.
+
+Instead of treating predictions as simple:
+
+- yes
+- no
+
+outcomes, I started looking at the probability scores themselves and how they could be used to rank patients by relative risk.
+
+This felt like a different type of analysis compared to earlier modeling work.
+
+---
+
+## What stood out
+
+The predicted risk scores were not evenly distributed.
+
+Most patients were assigned relatively low probabilities, while a much smaller group appeared at the higher end of the distribution.
+
+This mirrors what I've seen throughout the project:
+
+- low overall readmission rate
+- strong class imbalance
+- concentration of risk within a smaller subset of patients
+
+---
+
+## Threshold behavior became easier to understand
+
+One thing that became clearer today is that thresholds are not just technical settings.
+
+They directly change how many patients are considered "high risk."
+
+For example:
+
+Lower threshold:
+- more patients flagged
+- higher recall
+- lower precision
+
+Higher threshold:
+- fewer patients flagged
+- lower recall
+- higher precision
+
+Earlier in the project, threshold tuning felt mostly like model optimization.
+
+Today it felt more like a policy decision.
+
+---
+
+## Updated understanding of risk
+
+My interpretation of risk has changed slightly.
+
+Earlier, I thought about readmission risk mostly as:
+
+> predicting whether a patient returns within 30 days
+
+Now I think about it more as:
+
+> identifying patients whose historical healthcare utilization patterns resemble previously readmitted patients
+
+That may sound similar, but it shifts the focus away from certainty and toward probability.
+
+---
+
+## Important observation
+
+The dataset is encounter-level, meaning the same patient can appear multiple times across different hospital encounters.
+
+This introduces dependency between records and may influence how model performance should be interpreted.
+
+It does not invalidate the analysis, but it is an important limitation to keep in mind when evaluating results.
+
+---
+
+## Current interpretation
+
+At this point, the most consistent pattern in the entire project remains:
+
+> patients with higher prior healthcare utilization tend to show higher readmission risk.
+
+This pattern has now appeared across:
+
+- EDA
+- statistical testing
+- machine learning models
+- SQL analysis
+- risk scoring outputs
+
+I am treating this as a stable observational finding rather than a causal conclusion.
+
+---
+
+## Reflection
+
+One thing that surprised me is how much the project has gradually shifted away from the original question.
+
+Now I find myself asking:
+
+> What does the model believe "risk" actually represents?
+
+So far, the answer seems to be strongly connected to prior interaction with the healthcare system, especially inpatient utilization patterns.
+
