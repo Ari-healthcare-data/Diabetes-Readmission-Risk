@@ -539,6 +539,131 @@ Everything else:
 
 appears to add smaller incremental variation on top of that structure.
 
+---
+
+### 8.7 - Patient Risk Reporting Layer (`07_patient_risk_summary.sql`) & Power BI Dashboard Development
+
+After completing the SQL feature engineering, validation layers and reporting layer, I moved into dashboard development using Power BI.
+
+The objective was to convert the analytical findings into a reporting structure that could support stakeholder decision-making.
+
+#### Reporting dataset creation
+
+A patient-level reporting table was created:
+
+`patient_risk_summary`
+
+The purpose of this table was to aggregate encounter-level activity into patient-level metrics suitable for dashboard consumption.
+
+The table combines:
+
+- utilization measures
+- encounter history
+- risk category information
+- medication burden
+- length of stay
+- readmission outcomes
+
+This reduced the complexity of reporting directly from encounter-level records while improving dashboard performance.
+
+
+#### Dashboard design approach
+
+Rather than organizing pages around dataset tables, I organized them around business questions.
+
+The dashboard was structured into four views:
+
+##### Page 1 - Executive Clinical Overview
+
+Answers:
+
+> What is the overall state of the patient population?
+
+Key KPIs:
+
+- total patients
+- high risk patients
+- readmission rate
+- average length of stay
+- average medication burden
+
+
+##### Page 2 - Patient Risk Stratification
+
+Answers:
+
+> How do patient segments differ from one another?
+
+Focus:
+
+- utilization intensity
+- medication burden
+- patient distribution
+- risk concentration
+
+
+##### Page 3 - Clinical Risk Drivers
+
+Answers:
+
+> What characteristics appear most associated with elevated readmission risk?
+
+Focus:
+
+- utilization score
+- inpatient visit frequency
+- medication burden
+- readmission rate
+
+
+##### Page 4 - Executive Summary
+
+Answers:
+
+> What are the major findings and recommended actions?
+
+Focus:
+
+- KPI consolidation
+- key findings
+- stakeholder-oriented recommendations
+
+#### DAX Measures Created
+
+Several reporting measures were developed including:
+
+- Total Patients
+- High Risk Patients
+- 30-Day Readmission Rate
+- Average Length of Stay
+- Average Medications per Patient
+- Average Inpatient Visits
+
+These measures were designed to remain responsive to dashboard filtering and risk-category segmentation.
+
+#### Dashboard Development Challenges
+
+Several issues emerged during development:
+
+- SQL aggregation mismatches
+- missing columns during Power BI refreshes
+- table dependency errors
+- patient-level vs encounter-level calculation differences
+- filter responsiveness of KPI measures
+
+Resolving these issues required several iterations of both SQL table design and Power BI measure logic.
+
+#### Outcome
+
+The final dashboard provides an end-to-end reporting layer connecting:
+
+- Python analysis
+- SQL feature engineering
+- risk scoring
+- business intelligence reporting
+
+This stage transformed the project from a modeling exercise into a more complete healthcare analytics workflow.
+
 
 ---
 

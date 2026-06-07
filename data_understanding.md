@@ -1239,3 +1239,113 @@ Now I find myself asking:
 
 So far, the answer seems to be strongly connected to prior interaction with the healthcare system, especially inpatient utilization patterns.
 
+---
+
+# Day 17 - Dashboard Development & Patient-Level Risk Reporting
+
+Today felt very different from most of the project.
+
+For the first time, I was asking: How should these findings actually be presented to someone making decisions?
+
+That shift ended up being more challenging than I expected.
+
+---
+
+## What I worked on
+
+Built a multi-page Power BI dashboard using outputs from the SQL layer.
+
+To support reporting, I created a new patient-level aggregation table:
+
+`patient_risk_summary`
+
+This table summarizes patient encounter history into metrics that are easier to visualize and filter inside Power BI.
+
+The dashboard ultimately grew into four pages:
+
+- Executive Clinical Overview
+- Patient Risk Stratification
+- Clinical Risk Drivers
+- Executive Summary
+
+---
+
+## Biggest challenge today
+
+The hardest part wasn't building visuals.
+
+It was making sure the numbers actually meant what I thought they meant.
+
+Several issues came up during development:
+
+- Power BI refresh errors
+- missing SQL columns
+- aggregation mismatches
+- measures that looked correct but didn't respond to filters properly
+
+At one point I realized that a KPI was technically calculating correctly but was completely disconnected from dashboard filtering.
+
+That was a good reminder that a number being "correct" is not always the same thing as being useful.
+
+---
+
+## What surprised me
+
+One thing that stood out is how much easier it is to tell a story once everything is aggregated at the patient level.
+
+Earlier stages felt fragmented:
+
+- EDA
+- statistics
+- machine learning
+- SQL
+
+all existed somewhat independently.
+
+The dashboard forced me to connect everything into a single narrative.
+
+Once I started building visuals, the same pattern showed up again almost immediately:
+
+high-utilization patients consistently sit at the highest levels of readmission risk.
+
+---
+
+## Updated understanding
+
+Earlier in the project I thought readmission prediction was the central goal.
+
+Now I think the more interesting question is:
+
+> What characteristics consistently appear among patients who return to the hospital?
+
+The answer still seems heavily connected to utilization history.
+
+Particularly:
+
+- inpatient visits
+- overall encounter frequency
+- medication burden
+
+These variables continue appearing regardless of whether I use:
+
+- SQL
+- statistics
+- machine learning
+- dashboard reporting
+
+---
+
+## Reflection
+
+Today felt like the first day where the project resembled something I might actually hand to a stakeholder.
+
+Not because the analysis suddenly became better, but because the findings became easier to communicate.
+
+Looking back, a lot of the project has been about validating the same signal through different methods.
+
+The dashboard ended up becoming the place where all of those pieces finally came together.
+
+It also exposed a few reporting mistakes and calculation assumptions that I probably would not have caught otherwise.
+
+That alone made the dashboard development process worthwhile.
+

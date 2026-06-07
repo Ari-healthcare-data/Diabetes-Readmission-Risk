@@ -93,25 +93,148 @@ Completed SQL files:
 - `04_risk_cohorts.sql`
 - `05_feature_engineering.sql`
 - `06_dashboard_views.sql`
+- `07_patient_risk_summary.sql`
 
 ---
 
-## Current Progress (End of Day  16)
+## Current Progress (End of Day 17)
 
-Risk Scoring Layer (New Addition in 04_modeling Kaggle notebook)
+### Power BI Dashboard Development (Completed)
 
-Rather than predicting only 0 / 1 readmission outcomes, the model now outputs:
+After completing the SQL feature engineering and risk scoring layers, I shifted focus toward reporting and visualization.
 
-- a risk probability score
-- mapped into interpretable clinical categories
+The goal was to translate the findings from the Python modeling work and SQL analysis into a dashboard that could be used by a hospital operations or population health team.
 
-Risk logic used:
-- Low risk: < 0.3
-- Medium risk: 0.3 – 0.6
-- High risk: > 0.6
+Rather than building visuals directly from encounter-level records, I created a patient-level summary layer in PostgreSQL:
 
+`patient_risk_summary`
 
-This creates a more practical structure for hospital decision-making, where prioritization matters more than binary classification.
+This table aggregates utilization and risk information across patient encounters and serves as the primary reporting dataset for Power BI.
+
+### Dashboard Pages Created
+
+#### Page 1 — Executive Clinical Overview
+#### Page 2 — Patient Risk Stratification
+#### Page 3 — Clinical Risk Drivers
+#### Page 4 — Executive Summary
+
+### Biggest Finding So Far
+
+One pattern has remained remarkably consistent throughout every stage of the project:
+
+> Patients with greater prior healthcare utilization tend to experience substantially higher readmission risk.
+
+This pattern appeared in:
+
+- EDA
+- statistical testing
+- Logistic Regression
+- Random Forest
+- XGBoost
+- SQL validation
+- dashboard reporting
+
+I am treating this as a strong observational finding rather than evidence of causation.
+
+---
+
+# Power BI Dashboard Preview
+
+One of the goals of this project was to move beyond model outputs and create something that resembles how healthcare analytics findings might actually be consumed by decision-makers.
+
+After completing the SQL feature engineering and patient risk scoring layers, I built a four-page Power BI dashboard focused on:
+
+- patient risk stratification
+- healthcare utilization patterns
+- readmission monitoring
+- executive-level reporting
+
+The dashboard is powered by SQL-generated patient risk tables and summarizes both utilization behavior and modeled risk indicators.
+
+---
+
+## Page 1 - Executive Clinical Overview
+
+This page provides a high-level summary of the patient population and key readmission metrics.
+
+Highlights include:
+
+- total patient population
+- high-risk patient counts
+- 30-day readmission rate
+- average length of stay
+- medication burden
+- patient risk distribution
+
+![Executive Clinical Overview](images/page_1_overview.png)
+
+---
+
+## Page 2 - Patient Risk Stratification
+
+This page focuses on how patients separate across risk categories generated from utilization-based scoring.
+
+Key views include:
+
+- patient counts by risk segment
+- utilization score comparisons
+- average medication burden
+- average length of stay
+- utilization severity distributions
+
+![Patient Risk Stratification](images/page_2_patient_risk_stratification.png)
+
+---
+
+## Page 3 - Clinical Risk Drivers
+
+This page explores the variables most strongly associated with elevated patient risk.
+
+Visuals examine:
+
+- utilization score differences
+- medication burden
+- inpatient visit behavior
+- encounter frequency
+- readmission rates across risk categories
+
+One of the most consistent findings throughout the project appears again here:
+
+> patients with greater prior healthcare utilization generally exhibit higher readmission risk.
+
+![Clinical Risk Drivers](images/page_3_clinical_risk_drivers.png)
+
+---
+
+## Page 4 - Executive Summary
+
+The final page consolidates key findings into a presentation-style summary intended for non-technical stakeholders.
+
+It combines:
+
+- major project KPIs
+- risk distribution summaries
+- readmission comparisons
+- recommended clinical actions
+
+This page was designed to simulate the type of summary view that healthcare leadership teams might review during operational reporting.
+
+![Executive Summary](images/page_4_executive_summary.png)
+
+---
+
+### Dashboard Development Notes
+
+Building the dashboard ended up being one of the more challenging parts of the project.
+
+A significant portion of the work involved:
+
+- designing SQL aggregation layers
+- creating patient-level risk scoring tables
+- troubleshooting Power BI relationships and refresh issues
+- translating analytical findings into business-facing metrics
+
+The dashboard is not intended to be a production clinical tool, but rather a demonstration of how predictive modeling, SQL analytics, and BI reporting can be combined into a single healthcare analytics workflow.
 
 ---
 
