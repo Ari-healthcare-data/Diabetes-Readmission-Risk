@@ -1,8 +1,6 @@
-# Methodology (Work in Progress)
+# Methodology
 
-This document outlines how I approached the project so far. It’s still evolving, and I expect it to change quite a bit as I move deeper into the analysis and eventually into modeling and dashboard work.
-
-Right now it mostly reflects what I’ve actually done and how I’ve been thinking through the dataset step by step, rather than a strict or fully finalized methodology.
+This document summarizes the end-to-end methodology used throughout the project, from data exploration and feature engineering through modeling, SQL-based analytics, and dashboard development.
 
 ---
 
@@ -707,8 +705,8 @@ Because of this, I’m treating results as exploratory and descriptive, not caus
 
 ---
 
-## Closing notes (for now)
+## Closing notes 
 
-This methodology will continue to evolve as the project progresses.
+This methodology documents the complete analytical workflow used in the project, from raw data exploration through to modeling and dashboard development.
 
-At this stage, the focus is less on building a perfect pipeline and more on understanding the data deeply before modeling.
+Rather than optimizing for model complexity alone, the emphasis was on validating whether consistent, interpretable signals, particularly utilization-based patterns, persisted across statistical analysis, machine learning models, SQL transformations, and BI reporting.
