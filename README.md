@@ -25,7 +25,7 @@ The final result is a healthcare analytics workflow that combines:
 
 ## Table of Contents
 
-- [Executive Summary](#executive-summary)
+- [Executive Summary](/executive_summary.md)
 - [Dataset](#dataset)
 - [Project Workflow](#project-workflow)
   - [Phase 1: Python Analytics](#phase-1-python-analytics)
